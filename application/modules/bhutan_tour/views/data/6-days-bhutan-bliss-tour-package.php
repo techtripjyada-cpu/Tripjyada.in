@@ -1,0 +1,97 @@
+<?php
+$package = [
+    'name'        => '6-Day Bhutan Bliss Tour Package (5N/6D)',
+    'duration'    => '5 Nights 6 Days',
+    'type'        => 'Group Tour',
+    'best_seller' => false,
+    'image'       => 'assets/images/product/6.jpg',
+    'price'       => 'Contact for Price',
+    'meta_title'  => 'Bhutan Tour Package 5 Nights 6 Days | Bliss Tour Package',
+    'meta_desc'   => 'Book our 5N/6D Bhutan Bliss Tour Package. Tiger\'s Nest, Punakha Dzong, Dochula Pass & Thimphu — the best of Bhutan in 6 days. Ideal for first-time visitors. Book now!',
+    'urgency'     => '🔥 Limited Seats This Season! First-timer\'s favourite — secure your Bhutan permit and spot today.',
+    'overview'    => "Perfect for first-time visitors and those with limited time, the 6-Day Bhutan Bliss Tour delivers the very best of the kingdom — compressed into a smooth, perfectly paced itinerary. In just six days, you will trek to the legendary Tiger's Nest Monastery, stand at the edge of the high Dochula Pass overlooking snow-capped Himalayan peaks, explore the ancient riverside Punakha Dzong, and walk the lively streets of Thimphu.\n\nStarting from Paro — Bhutan's only international gateway — this tour covers the western circuit, which holds the kingdom's most iconic landmarks. Every day is crafted to balance sightseeing, cultural immersion, and time to simply breathe in the crisp mountain air.\n\nWhy Book Now? Bhutan uses a controlled tourism model with limited permits per season. Popular batch dates sell out weeks in advance. Lock in your slot today and get guaranteed guide and vehicle assignment, flexible payment options, and the best pricing before the season peak.",
+    'highlights'  => [
+        'Tiger\'s Nest Monastery Trek: Hike to the sacred Paro Taktsang clinging to a sheer 900 m cliff.',
+        'Punakha Dzong: Walk through Bhutan\'s most beautiful fortress at the meeting of two sacred rivers.',
+        'Dochula Pass (10,200 ft): 108 memorial chortens framed by panoramic Himalayan peaks.',
+        'Thimphu City Tour: Buddha Dordenma, Memorial Chorten, and Tashichhodzong.',
+        'Chimi Lhakhang: The hilltop fertility temple of the Divine Madman.',
+        'Paro Valley Exploration: Rinpung Dzong, National Museum, and market shopping.',
+    ],
+    'inclusions'  => [
+        'Comfortable Stays: 5 Nights accommodation in quality 3-star hotels (twin sharing).',
+        'Daily Meals: Breakfast and Dinner at all hotels throughout the tour.',
+        'Private Transport: Dedicated, sanitised vehicle for all transfers and sightseeing.',
+        'Local Expert Guide: Licensed, English-speaking Bhutanese guide for all sightseeing.',
+        'Permits & Clearances: Complete handling of all border entry permits and driver allowances.',
+    ],
+    'exclusions'  => [
+        'Airfare, train tickets, or individual monument/museum entry fees.',
+        'Bhutan Sustainable Development Fee (SDF) of ₹1,200 per night for Indian tourists.',
+        'Personal expenses (laundry, beverages, tipping, telephone calls).',
+        'Any adventure activities, optional hikes, or travel insurance.',
+    ],
+    'itinerary'   => [
+        [
+            'day'   => 'Day 1',
+            'title' => 'Arrival in Paro — Welcome to the Last Shangri-La',
+            'desc'  => 'Touch down at Paro International Airport, approached through a dramatic narrow valley with terraced fields and ancient dzongs visible from your window. Your guide receives you with a traditional greeting and transfers you to your hotel. Spend the afternoon strolling through Paro town\'s market street and visiting the impressive Rinpung Dzong overlooking the valley. An early evening and a good rest — tomorrow\'s trek begins at sunrise.',
+            'stay'  => 'Paro',
+            'meals' => 'Dinner',
+        ],
+        [
+            'day'   => 'Day 2',
+            'title' => 'The Trek You\'ll Never Forget — Tiger\'s Nest Monastery',
+            'desc'  => 'Rise early for the hike of a lifetime to Paro Taktsang (Tiger\'s Nest). The 4–5 hour round trek winds through blue pine forests to reach this sacred monastery perched 900 metres above the valley floor. Guru Rinpoche is said to have meditated here for three months in the 8th century. Visit the main prayer halls and enjoy the breathtaking views over Paro Valley. Return to the hotel for a well-deserved rest.',
+            'stay'  => 'Paro',
+            'meals' => 'Breakfast & Dinner',
+        ],
+        [
+            'day'   => 'Day 3',
+            'title' => 'Mountain Drive to the Capital — Paro to Thimphu',
+            'desc'  => 'Drive to Thimphu (approximately 1.5 hours). Visit the iconic 51.5-metre Buddha Dordenma statue with its spectacular valley views, the National Memorial Chorten where locals perform koras (circumambulations) throughout the day, and the Craft Bazaar for traditional Bhutanese textiles and crafts. In the afternoon, visit Tashichhodzong — the white-washed fortress that serves as Bhutan\'s seat of government.',
+            'stay'  => 'Thimphu',
+            'meals' => 'Breakfast & Dinner',
+        ],
+        [
+            'day'   => 'Day 4',
+            'title' => 'Over the Cloud Pass — Thimphu to Punakha via Dochula Pass',
+            'desc'  => 'An early morning departure from Thimphu brings you to the majestic Dochula Pass (10,200 ft), where 108 memorial chortens stand in a row against a backdrop of snow-capped Himalayan peaks — on clear mornings this is one of the finest panoramas in the country. Descend into the warm subtropical Punakha Valley to visit Punakha Dzong, built in 1637 at the confluence of the Pho Chhu and Mo Chhu rivers. End the day with a short walk to Chimi Lhakhang — the hilltop fertility temple of the Divine Madman.',
+            'stay'  => 'Punakha',
+            'meals' => 'Breakfast & Dinner',
+        ],
+        [
+            'day'   => 'Day 5',
+            'title' => 'Valley Drive Back — Punakha to Paro via Suspension Bridge',
+            'desc'  => 'Morning walk through Punakha\'s rice terraces and across the beautiful suspension bridge over the Mo Chhu River. Drive back to Paro via Dochula Pass with a stop at Drukgyel Dzong ruins — a 17th-century fortress destroyed by fire, offering views of Mt. Jomolhari on clear days. Afternoon free for last-minute souvenir shopping at the Paro market. Pick up handmade paper products, prayer flags, incense, and local handicrafts.',
+            'stay'  => 'Paro',
+            'meals' => 'Breakfast & Dinner',
+        ],
+        [
+            'day'   => 'Day 6',
+            'title' => 'Homeward Bound — Paro to Bagdogra / NJP',
+            'desc'  => 'After a relaxed breakfast, your guide transfers you to Paro International Airport with warm farewells. As your aircraft banks over the Himalayan peaks, carry home not just photographs but the deep calm that Bhutan quietly plants in every visitor — the knowledge that a kingdom where happiness is policy, forests are sacred, and time moves gently, does exist.',
+            'stay'  => '',
+            'meals' => 'Breakfast',
+        ],
+    ],
+    'faqs'        => [
+        [
+            'q' => 'Is 6 days enough to see Bhutan?',
+            'a' => 'Yes — 6 days is ideal for a first visit, covering the most iconic sites in Bhutan\'s western circuit: Tiger\'s Nest, Punakha Dzong, Dochula Pass, and Thimphu. You get a rich, fulfilling experience without feeling rushed. For deeper exploration of central and eastern Bhutan, we recommend our 9-night or 11-day packages.',
+        ],
+        [
+            'q' => 'Do Indian nationals need a visa for Bhutan?',
+            'a' => 'No visa is required, but you need a valid Indian Passport (minimum 6 months validity) or original Voter ID card. Aadhaar Cards and PAN Cards are NOT accepted at immigration. Our team handles all permit paperwork on your behalf.',
+        ],
+        [
+            'q' => 'What is the SDF fee for Indian tourists?',
+            'a' => 'The Sustainable Development Fee (SDF) is ₹1,200 per person per night. For this 5-night tour, that amounts to ₹6,000 per person. Children 6–12 pay 50% and children under 5 are exempt. This fee is mandatory and goes directly toward national conservation.',
+        ],
+        [
+            'q' => 'Is the Tiger\'s Nest trek suitable for all fitness levels?',
+            'a' => 'The trek is moderately challenging — a 4–5 hour round trip with approximately 900 metres of altitude gain. Most reasonably fit people manage it comfortably with regular breaks. Horses are available for part of the route for those who need assistance. We recommend wearing comfortable walking shoes and carrying water.',
+        ],
+    ],
+    'wa_msg'      => 'Hi TripJyada! I am interested in the 6-Day Bhutan Bliss Tour Package (5N/6D). Please share pricing, available batch dates, and booking details.',
+];

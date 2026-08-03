@@ -1,0 +1,26 @@
+# Secret keys — NEVER commit these
+.env
+
+# Uploads (user-generated; managed on server)
+assets/uploads/
+
+# PHP runtime cache (contains refreshed tokens & feed data)
+application/cache/*.cache
+application/cache/*.json
+
+# PHP error logs
+*.log
+application/logs/*.log
+
+# Dev-only seed/migration scripts
+scripts/
+
+# Node (build tooling only, not needed on server)
+node_modules/
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.settings/

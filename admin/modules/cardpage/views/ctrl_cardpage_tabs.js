@@ -1,0 +1,68 @@
+
+app.controller('ctrl_cardpage_tabs',function($scope,$http){
+	$http.get('login/check_valid_session').success(function(data){if(data!=1){window.location.assign('<?=site_url("login")?>');}});
+
+	$scope.current_slug='all';
+	$scope.tabs=[];
+	$scope.days_array=[];
+	$scope.tab_form={page_slug:'all',active:1,sort_order:0};
+
+	$scope.load_tabs=function(){
+		$http.get('cardpage/get_tabs?slug='+$scope.current_slug).success(function(data){
+			$scope.tabs=data;
+		});
+	};
+
+	$scope.day_count=function(day_data){
+		try{ return day_data?JSON.parse(day_data).length:0; }catch(e){ return 0; }
+	};
+
+	$scope.new_tab=function(){
+		$scope.tab_form={page_slug:$scope.current_slug,active:1,sort_order:$scope.tabs.length};
+		$scope.days_array=[];
+	};
+
+	$scope.edit_tab=function(tab){
+		$scope.tab_form=angular.copy(tab);
+		try{ $scope.days_array=tab.day_data?JSON.parse(tab.day_data):[]; }
+		catch(e){ $scope.days_array=[]; }
+	};
+
+	$scope.add_day=function(){
+		$scope.days_array.push({day:'Day '+($scope.days_array.length+1),title:'',desc:''});
+	};
+
+	$scope.remove_day=function(idx){
+		$scope.days_array.splice(idx,1);
+	};
+
+	$scope.save_tab=function(){
+		var d=angular.copy($scope.tab_form);
+		d.page_slug=$scope.current_slug;
+		d.day_data=JSON.stringify($scope.days_array);
+		$http.post('cardpage/save_tab',$.param(d),{headers:{'Content-Type':'application/x-www-form-urlencoded'}}).success(function(r){
+			if(r*1>0){
+				messages("success","Saved!","Tab saved successfully",3000);
+				$scope.load_tabs();
+				$('#cpTabModal').modal('hide');
+			}else{
+				messages("danger","Error!","Could not save tab",3000);
+			}
+		});
+	};
+
+	$scope.delete_tab=function(id){
+		if(confirm("Delete this tab?")){
+			$http.get('cardpage/delete_tab?id='+id).success(function(data){
+				if(data=='1'){
+					messages("success","Deleted!","Tab deleted",3000);
+					$scope.load_tabs();
+				}else{
+					messages("danger","Error!","Could not delete tab",3000);
+				}
+			});
+		}
+	};
+
+	$scope.load_tabs();
+});

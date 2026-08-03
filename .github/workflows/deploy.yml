@@ -1,0 +1,40 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - main   # change to 'master' if that's your default branch
+
+jobs:
+  deploy:
+    name: FTP Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy files to Hostinger via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /public_html/   # adjust if site is in a subfolder
+          protocol: ftps              # use 'ftp' if Hostinger doesn't support FTPS
+          port: 21
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/scripts/**
+            .env
+            .env.example
+            application/logs/**
+            application/cache/*.cache
+            application/cache/*.json
+            assets/uploads/**
+            package.json
+            package-lock.json
+            purgecss.config.js
+            purge.mjs
