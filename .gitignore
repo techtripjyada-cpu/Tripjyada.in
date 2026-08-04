@@ -1,6 +1,10 @@
 # Secret keys — NEVER commit these
 .env
 
+# Environment-specific config (base_url differs per environment)
+application/config/config.php
+admin/config/config.php
+
 # Uploads (user-generated; managed on server)
 assets/uploads/
 
