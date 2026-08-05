@@ -20,9 +20,9 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /public_html/   # adjust if site is in a subfolder
-          protocol: ftp
-          port: 21
+          server-dir: /home/u584560477/domains/tripjyada.in/public_html/
+          protocol: sftp
+          port: 65002
           exclude: |
             **/.git*
             **/.git*/**
