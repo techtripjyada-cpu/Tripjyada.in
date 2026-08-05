@@ -235,7 +235,7 @@
         <div class="footer-bottom" style="position:relative; z-index:1;">
             <div class="container">
                 <div class="footer-copyright text text-16 text-center">
-                    Copyright &copy;Tripjyada | All Right Reserved
+                    Copyright &copy; <?= date('Y') ?> Tripjyada | All Rights Reserved
                 </div>
             </div>
         </div>
