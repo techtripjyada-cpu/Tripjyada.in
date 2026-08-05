@@ -12,7 +12,7 @@
         'card_jpg'     => base_url() . 'assets/images/slider/1.webp',
         'width'        => 1920,
         'height'       => 1280,
-        'name'         => 'LIVE THE DREAM',
+        'name'         => 'YOUR BHUTAN AWAITS',
         'location'     => 'Bhutan is Calling',
         'rating'       => '4.8',
         'desc'         => "Stop scrolling, start packing. Tiger's Nest, Punakha Dzong & pristine Himalayan valleys — your most unforgettable trip starts here.",
