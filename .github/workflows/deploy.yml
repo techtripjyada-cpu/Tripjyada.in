@@ -21,7 +21,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /public_html/   # adjust if site is in a subfolder
-          protocol: ftps              # use 'ftp' if Hostinger doesn't support FTPS
+          protocol: ftp
           port: 21
           exclude: |
             **/.git*
