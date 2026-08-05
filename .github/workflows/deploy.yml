@@ -7,32 +7,33 @@ on:
 
 jobs:
   deploy:
-    name: SFTP Deploy
+    name: FTP Deploy
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy files to Hostinger via SFTP
-        uses: Dylan700/sftp-upload-deploy@latest
+      - name: Deploy files to Hostinger via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          port: 65002
-          folders: |
-            ./ => /home/u584560477/domains/tripjyada.in/public_html/
-          ignore: |
-            .git/
-            .github/
-            node_modules/
-            scripts/
+          server-dir: /public_html/
+          protocol: ftp
+          port: 21
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/scripts/**
             .env
             .env.example
-            application/logs/
-            application/cache/
-            assets/uploads/
+            application/logs/**
+            application/cache/*.cache
+            application/cache/*.json
+            assets/uploads/**
             package.json
             package-lock.json
             purgecss.config.js
