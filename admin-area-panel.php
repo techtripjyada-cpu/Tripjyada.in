@@ -1,5 +1,7 @@
 <?php
-define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
+require __DIR__ . '/application/bootstrap_env.php';
+
+define('ENVIRONMENT', getenv('CI_ENV') ?: 'production');
 switch (ENVIRONMENT)
 {
     case 'development':

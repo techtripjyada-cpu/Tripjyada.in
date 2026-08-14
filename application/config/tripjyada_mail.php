@@ -19,7 +19,7 @@ $config['tripjyada_mail'] = array(
     'phone'                         => getenv('TRIPJYADA_SUPPORT_PHONE') ?: '+91-9558515518',
     'phone_html'                    => getenv('TRIPJYADA_SUPPORT_PHONE_HTML') ?: 'tel:+919558515518',
     'public_contact_emails'         => ! empty($publicContactEmails) ? $publicContactEmails : array($supportEmail),
-    'mail_test_token'               => getenv('TRIPJYADA_MAIL_TEST_TOKEN') ?: 'tripjyada-mail-test-2026',
+    'mail_test_token'               => trim((string) getenv('TRIPJYADA_MAIL_TEST_TOKEN')),
     'mail_test_default_recipient'   => getenv('TRIPJYADA_MAIL_TEST_DEFAULT_RECIPIENT') ?: $supportEmail,
     'send_booking_auto_reply'       => $sendBookingAutoReply === false
         ? true

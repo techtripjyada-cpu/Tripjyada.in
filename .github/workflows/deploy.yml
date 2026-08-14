@@ -3,19 +3,69 @@ name: Deploy to Hostinger
 on:
   push:
     branches:
-      - master
+      - main
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Preview changes without modifying Hostinger
+        required: true
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hostinger-production
+  cancel-in-progress: false
 
 jobs:
   deploy:
-    name: FTP Deploy
+    name: Validate and deploy
+    if: github.event_name == 'workflow_dispatch' || vars.HOSTINGER_AUTO_DEPLOY == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment:
+      name: production
+      url: https://tripjyada.in/
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Refuse tracked production files
+        shell: bash
+        run: |
+          set -euo pipefail
+          tracked="$(git ls-files -- \
+            .env \
+            application/config/config.php \
+            application/config/database.php \
+            admin/config/config.php \
+            admin/config/database.php \
+            'application/logs/log-*' \
+            assets/uploads \
+            assets/temp \
+            files/citybanner)"
+          if [[ -n "$tracked" ]]; then
+            echo "::error::Protected production files are tracked:"
+            printf '%s\n' "$tracked"
+            exit 1
+          fi
+
+      - name: Validate application PHP syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          find application admin -type f -name '*.php' -print0 \
+            | xargs -0 -n1 php -l
+          php -l index.php
+          php -l admin-area-panel.php
 
       - name: Deploy files to Hostinger via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        uses: SamKirkland/FTP-Deploy-Action@110f9186c050f71550953127052e77650219c287 # v4.4.0
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
@@ -23,17 +73,29 @@ jobs:
           server-dir: /public_html/
           protocol: ftp
           port: 21
+          state-name: .ftp-deploy-sync-state.json
+          dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+          dangerous-clean-slate: false
+          timeout: 60000
+          log-level: standard
           exclude: |
             **/.git*
             **/.git*/**
+            **/.github/**
+            **/.settings/**
             **/node_modules/**
             **/scripts/**
             .env
-            .env.example
+            .env.*
+            application/config/config.php
+            admin/config/config.php
+            application/config/database.php
+            admin/config/database.php
             application/logs/**
-            application/cache/*.cache
-            application/cache/*.json
+            application/cache/**
             assets/uploads/**
+            assets/temp/**
+            files/citybanner/**
             package.json
             package-lock.json
             purgecss.config.js

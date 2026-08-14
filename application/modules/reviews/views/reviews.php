@@ -48,7 +48,7 @@
                                     </div>
                                     <?php if (@$r->r_img) { ?>
                                         <div class="review-icon">
-                                            <img class="review-img" src="<?= base_url('assets/uploads/reviewimg/thumb/') . $r- alt="Review image" loading="lazy">r_img ?>" alt="<?= $r->name ?> review <?= $company3 ?>">
+                                            <img class="review-img" src="<?= base_url('assets/uploads/reviewimg/thumb/') . $r->r_img ?>" alt="<?= $r->name ?> review <?= $company3 ?>" loading="lazy">
                                         </div>
                                     <?php } ?>
                                     <div class="review-content">

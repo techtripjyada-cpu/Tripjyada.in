@@ -15,7 +15,12 @@ application/cache/*.json
 
 # PHP error logs
 *.log
-application/logs/*.log
+application/logs/*
+!application/logs/index.html
+
+# Runtime/user-generated temporary files
+assets/temp/
+files/citybanner/
 
 # Dev-only seed/migration scripts
 scripts/

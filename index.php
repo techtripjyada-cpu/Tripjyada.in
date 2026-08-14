@@ -1,14 +1,16 @@
 <?php
+require __DIR__ . '/application/bootstrap_env.php';
+
 /*
 |--------------------------------------------------------------------------
 | APPLICATION ENVIRONMENT
 |--------------------------------------------------------------------------
-| Temporary debugging mode for fixing white screen issue.
-| After fixing the error, change 'development' to 'production'.
+| Defaults to production. Set CI_ENV=development in the local .env file
+| when detailed errors are needed during development.
 |--------------------------------------------------------------------------
 */
 
-define('ENVIRONMENT', 'development');
+define('ENVIRONMENT', getenv('CI_ENV') ?: 'production');
 
 switch (ENVIRONMENT) {
 	case 'development':
@@ -33,27 +35,6 @@ switch (ENVIRONMENT) {
 		echo 'The application environment is not set correctly.';
 		exit(1);
 }
-
-/*
-|--------------------------------------------------------------------------
-| Load .env file — keeps secrets out of PHP source files
-|--------------------------------------------------------------------------
-*/
-(function () {
-    $envFile = __DIR__ . '/.env';
-    if (!is_file($envFile)) return;
-    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($lines as $line) {
-        $line = trim($line);
-        if ($line === '' || $line[0] === '#' || strpos($line, '=') === false) continue;
-        list($name, $value) = array_map('trim', explode('=', $line, 2));
-        if ($name === '') continue;
-        $value = trim($value, '"\'');
-        putenv("$name=$value");
-        $_ENV[$name]    = $value;
-        $_SERVER[$name] = $value;
-    }
-})();
 
 /*
 |--------------------------------------------------------------------------

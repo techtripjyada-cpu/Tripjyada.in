@@ -37,8 +37,19 @@ class Admin extends MX_Controller
         }
         $error = '';
         if ($this->input->post()) {
-            $pw = $this->input->post('password', true);
-            if ($pw === $this->adminCfg['password']) {
+            $pw = (string) $this->input->post('password', true);
+            $passwordHash = isset($this->adminCfg['password_hash'])
+                ? trim((string) $this->adminCfg['password_hash'])
+                : '';
+            $password = isset($this->adminCfg['password'])
+                ? (string) $this->adminCfg['password']
+                : '';
+
+            $validPassword = $passwordHash !== ''
+                ? password_verify($pw, $passwordHash)
+                : ($password !== '' && hash_equals($password, $pw));
+
+            if ($validPassword) {
                 $this->session->set_userdata('tripjyada_admin_auth', true);
                 redirect('admin/payments');
                 return;
