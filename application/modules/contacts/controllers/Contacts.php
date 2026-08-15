@@ -16,6 +16,196 @@ class Contacts extends MX_Controller
         echo Modules::run('template/layout2', $data);
     }
 
+    /**
+     * Render the standalone Bhutan campaign page.
+     *
+     * The view intentionally contains all of its own HTML, CSS and JavaScript.
+     */
+    public function landing_page()
+    {
+        $this->output->set_content_type('text/html', 'UTF-8');
+        $this->load->view('landing-page.html');
+    }
+
+    /**
+     * Render the standalone Sikkim & Darjeeling campaign page.
+     */
+    public function sdt_landing_page()
+    {
+        $this->output->set_content_type('text/html', 'UTF-8');
+        $this->load->view('sdt-landing-page.html');
+    }
+
+    /**
+     * Receive landing-page leads, save them for the admin panel and trigger mail.
+     */
+    public function landing_submit()
+    {
+        return $this->handle_landing_submission(
+            $this->landing_package_prices(),
+            array('Deluxe' => 0, 'Super Deluxe' => 8500, 'Premium' => 17500),
+            'Bhutan',
+            'Please select a valid Bhutan package.'
+        );
+    }
+
+    /**
+     * Receive Sikkim & Darjeeling landing-page leads, save them for the admin panel and trigger mail.
+     */
+    public function sdt_landing_submit()
+    {
+        return $this->handle_landing_submission(
+            $this->sdt_landing_package_prices(),
+            array('Deluxe' => 0, 'Super Deluxe' => 3500, 'Premium' => 7000),
+            'Sikkim & Darjeeling',
+            'Please select a valid Sikkim & Darjeeling package.'
+        );
+    }
+
+    private function handle_landing_submission(array $packagePrices, array $tierAdditions, $campaignLabel, $invalidPackageMessage)
+    {
+        if ($this->input->method(true) !== 'POST') {
+            return $this->landing_json(array(
+                'ok' => false,
+                'message' => 'Only form submissions are accepted.',
+            ), 405);
+        }
+
+        if (! $this->is_landing_ajax_request() || ! $this->is_same_origin_request()) {
+            return $this->landing_json(array(
+                'ok' => false,
+                'message' => 'This form submission could not be verified.',
+            ), 403);
+        }
+
+        // Bots commonly populate this field; return a neutral response so they
+        // cannot use the endpoint response to tune their submissions.
+        if ($this->landing_post_value('website') !== '') {
+            return $this->landing_json(array(
+                'ok' => true,
+                'message' => 'Thank you. Your enquiry has been received.',
+                'confirmation_email_sent' => false,
+            ), 200);
+        }
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('name', 'Name', 'required|trim|min_length[2]|max_length[100]');
+        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|max_length[190]');
+        $this->form_validation->set_rules('phone', 'Phone', 'required|trim|max_length[24]');
+        $this->form_validation->set_rules('travel_month', 'Travel month', 'trim|max_length[40]');
+        $this->form_validation->set_rules('travel_date', 'Travel date', 'trim|max_length[10]');
+        $this->form_validation->set_rules('travellers', 'Traveller count', 'required|trim|max_length[30]');
+        $this->form_validation->set_rules('hotel_category', 'Hotel category', 'required|trim|max_length[40]');
+        $this->form_validation->set_rules('package_name', 'Package', 'required|trim|max_length[150]');
+        $this->form_validation->set_rules('message', 'Message', 'trim|max_length[1000]');
+        $this->form_validation->set_rules('source', 'Source', 'trim|max_length[20]');
+        $this->form_validation->set_rules('privacy_consent', 'Contact consent', 'required');
+
+        if (! $this->form_validation->run()) {
+            $message = trim(strip_tags(validation_errors(' ', ' ')));
+            return $this->landing_json(array(
+                'ok' => false,
+                'message' => $message !== '' ? $message : 'Please check the highlighted form fields.',
+            ), 422);
+        }
+
+        if ($this->landing_post_value('privacy_consent') !== '1') {
+            return $this->landing_json(array(
+                'ok' => false,
+                'message' => 'Please confirm that we may contact you about this enquiry.',
+            ), 422);
+        }
+
+        $phone = $this->normalise_indian_mobile($this->landing_post_value('phone'));
+        if ($phone === '') {
+            return $this->landing_json(array(
+                'ok' => false,
+                'message' => 'Please enter a valid 10-digit Indian mobile number.',
+            ), 422);
+        }
+
+        $travelMonth = $this->landing_post_value('travel_month');
+        $allowedMonths = array('August 2026', 'September 2026', 'October 2026');
+        if ($travelMonth !== '' && ! in_array($travelMonth, $allowedMonths, true)) {
+            return $this->landing_json(array('ok' => false, 'message' => 'Please select a valid travel month.'), 422);
+        }
+
+        $travelDate = $this->landing_post_value('travel_date');
+        if ($travelDate !== '' && ! $this->is_valid_landing_date($travelDate)) {
+            return $this->landing_json(array('ok' => false, 'message' => 'Please select a valid travel date.'), 422);
+        }
+
+        $travellers = $this->landing_post_value('travellers');
+        $allowedTravellers = array('2 People', '3-5 People', '6+ People');
+        if (! in_array($travellers, $allowedTravellers, true)) {
+            return $this->landing_json(array('ok' => false, 'message' => 'Please select a valid traveller count.'), 422);
+        }
+
+        $hotelCategory = $this->landing_post_value('hotel_category');
+        $allowedHotelCategories = array('Deluxe', 'Super Deluxe', 'Premium');
+        if (! in_array($hotelCategory, $allowedHotelCategories, true)) {
+            return $this->landing_json(array('ok' => false, 'message' => 'Please select a valid hotel category.'), 422);
+        }
+
+        $packageName = $this->landing_post_value('package_name');
+        if (! array_key_exists($packageName, $packagePrices)) {
+            return $this->landing_json(array('ok' => false, 'message' => $invalidPackageMessage), 422);
+        }
+
+        $source = $this->landing_post_value('source', 'landing-page');
+        if (! in_array($source, array('hero', 'modal', 'landing-page'), true)) {
+            $source = 'landing-page';
+        }
+
+        $this->load->library('session');
+        $lastSubmission = (int) $this->session->userdata('landing_page_last_submit');
+        if ($lastSubmission > 0 && (time() - $lastSubmission) < 20) {
+            return $this->landing_json(array(
+                'ok' => false,
+                'message' => 'Please wait a few seconds before sending another enquiry.',
+            ), 429);
+        }
+        $this->session->set_userdata('landing_page_last_submit', time());
+
+        $estimatedPrice = '';
+        if ($packagePrices[$packageName] !== null) {
+            $estimatedPrice = 'INR ' . number_format($packagePrices[$packageName] + $tierAdditions[$hotelCategory]) . ' per person';
+        }
+
+        $lead = array(
+            'name' => $this->landing_post_value('name'),
+            'email' => strtolower($this->landing_post_value('email')),
+            'phone' => $phone,
+            'travel_month' => $travelMonth,
+            'travel_date' => $travelDate,
+            'travellers' => $travellers,
+            'hotel_category' => $hotelCategory,
+            'package_name' => $packageName,
+            'estimated_price' => $estimatedPrice,
+            'message' => $this->landing_post_value('message'),
+            'source' => $source,
+        );
+
+        $this->load->model('contacts_mdl');
+        $result = $this->contacts_mdl->landing_booking($lead, $campaignLabel);
+
+        if (empty($result['stored'])) {
+            return $this->landing_json(array(
+                'ok' => false,
+                'message' => 'We could not save your enquiry right now. Please call or WhatsApp us instead.',
+            ), 500);
+        }
+
+        $confirmationSent = ! empty($result['user_email_sent']);
+        return $this->landing_json(array(
+            'ok' => true,
+            'message' => $confirmationSent
+                ? "Thank you! Your {$campaignLabel} enquiry is saved and a confirmation email is on its way."
+                : "Thank you! Your {$campaignLabel} enquiry is saved. Our team will contact you shortly.",
+            'confirmation_email_sent' => $confirmationSent,
+        ), 201);
+    }
+
 
     function booking()
     {
@@ -106,7 +296,7 @@ class Contacts extends MX_Controller
     function test_mail()
     {
         $this->output->set_content_type('application/json');
-        $this->load->config('tripjyada_mail', true);
+        $this->load->config('tripjyada_mail');
         $mailConfig = (array) $this->config->item('tripjyada_mail');
 
         $configuredToken = isset($mailConfig['mail_test_token']) ? (string) $mailConfig['mail_test_token'] : '';
@@ -175,5 +365,99 @@ class Contacts extends MX_Controller
     {
         $ip = $this->input->ip_address();
         return in_array($ip, array('127.0.0.1', '::1'), true);
+    }
+
+    private function landing_json(array $payload, $statusCode)
+    {
+        return $this->output
+            ->set_content_type('application/json', 'UTF-8')
+            ->set_status_header($statusCode)
+            ->set_output(json_encode($payload));
+    }
+
+    private function is_landing_ajax_request()
+    {
+        return strtolower((string) $this->input->server('HTTP_X_REQUESTED_WITH')) === 'xmlhttprequest';
+    }
+
+    private function is_same_origin_request()
+    {
+        $origin = trim((string) $this->input->server('HTTP_ORIGIN'));
+        if ($origin === '') {
+            // X-Requested-With causes a cross-origin preflight, so an absent
+            // Origin is still safe for older same-origin browsers and proxies.
+            return true;
+        }
+
+        $originHost = parse_url($origin, PHP_URL_HOST);
+        $requestHost = preg_replace('/:\d+$/', '', (string) $this->input->server('HTTP_HOST'));
+        if (! is_string($originHost) || $originHost === '' || $requestHost === '') {
+            return false;
+        }
+
+        return hash_equals(strtolower($requestHost), strtolower($originHost));
+    }
+
+    private function normalise_indian_mobile($phone)
+    {
+        $digits = preg_replace('/\D+/', '', (string) $phone);
+        if (strlen($digits) === 12 && substr($digits, 0, 2) === '91') {
+            $digits = substr($digits, 2);
+        } elseif (strlen($digits) === 11 && substr($digits, 0, 1) === '0') {
+            $digits = substr($digits, 1);
+        }
+
+        return preg_match('/^[6-9][0-9]{9}$/', $digits) ? $digits : '';
+    }
+
+    private function is_valid_landing_date($value)
+    {
+        $date = DateTime::createFromFormat('!Y-m-d', $value);
+        return $date instanceof DateTime && $date->format('Y-m-d') === $value;
+    }
+
+    private function landing_package_prices()
+    {
+        return array(
+            'Bhutan Independence Day Offer' => 29749,
+            'Bhutan Quick Escape' => 29749,
+            'Classic Bhutan Discovery' => 36549,
+            'Bhutan Family Holiday' => 42499,
+            'Complete Bhutan Circuit' => 50999,
+            'Fly-In Bhutan Getaway' => 39099,
+            'Senior-Friendly Bhutan' => 46749,
+            'Romantic Bhutan Retreat' => 40799,
+            'Bhutan Festival Journey' => 55249,
+            'Bhutan Grand Experience' => 63749,
+            'Custom Bhutan Trip' => null,
+        );
+    }
+
+    private function sdt_landing_package_prices()
+    {
+        return array(
+            'Sikkim Darjeeling Special Offer' => 14999,
+            'Sikkim Darjeeling Quick Escape' => 14999,
+            'Classic Sikkim Darjeeling Discovery' => 18499,
+            'Sikkim Darjeeling Family Holiday' => 21999,
+            'Complete Sikkim Darjeeling Circuit' => 26999,
+            'North Sikkim Explorer' => 20499,
+            'Darjeeling Tea & Toy Train Special' => 12999,
+            'Romantic Sikkim Darjeeling Retreat' => 19499,
+            'Sikkim Darjeeling Festival Journey' => 22999,
+            'Grand Sikkim Darjeeling Experience' => 29999,
+            'Custom Sikkim Darjeeling Trip' => null,
+        );
+    }
+
+    private function landing_post_value($key, $default = '')
+    {
+        $value = $this->input->post($key, true);
+        if ($value === null || is_array($value)) {
+            return $default;
+        }
+
+        $value = trim((string) $value);
+        return $value === '' ? $default : $value;
     }
 }

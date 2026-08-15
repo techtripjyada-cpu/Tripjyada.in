@@ -39,6 +39,9 @@ class Mdl_contact extends CI_Model
             $this->db->or_like('mfrom', $search);
             $this->db->or_like('mto', $search);
             $this->db->or_like('msg', $search);
+            $this->db->or_like('category', $search);
+            $this->db->or_like('transportation', $search);
+            $this->db->or_like('configuration', $search);
             $this->db->or_like('timestamp', $search);
             $this->db->group_end();
         }

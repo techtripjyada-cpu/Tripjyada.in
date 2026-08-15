@@ -9,8 +9,8 @@ class Contacts_mdl extends CI_Model
     {
         parent::__construct();
         $this->load->database();
-        $this->load->config('tripjyada_smtp', true);
-        $this->load->config('tripjyada_mail', true);
+        $this->load->config('tripjyada_smtp');
+        $this->load->config('tripjyada_mail');
 
         $this->smtpConfig = (array) $this->config->item('tripjyada_smtp');
         $this->mailConfig = (array) $this->config->item('tripjyada_mail');
@@ -326,6 +326,112 @@ class Contacts_mdl extends CI_Model
         return true;
     }
 
+    /**
+     * Persist a campaign lead, notify the admin and acknowledge the traveller.
+     * Mail failures are reported separately so a temporary SMTP outage never
+     * causes a successfully stored lead to be lost or submitted repeatedly.
+     */
+    public function landing_booking(array $lead, $campaignLabel = 'Bhutan')
+    {
+        $phoneDisplay = '+91 ' . $lead['phone'];
+        $travelTiming = $lead['travel_date'] !== '' ? $lead['travel_date'] : $lead['travel_month'];
+
+        $messageParts = array(
+            'Landing-page enquiry',
+            'Travellers: ' . $lead['travellers'],
+            'Hotel: ' . $lead['hotel_category'],
+        );
+        if ($lead['estimated_price'] !== '') {
+            $messageParts[] = 'Displayed price: ' . $lead['estimated_price'];
+        }
+        if ($lead['message'] !== '') {
+            $messageParts[] = 'Message: ' . $lead['message'];
+        }
+
+        // The current production-compatible schema uses VARCHAR(300) for msg.
+        $databaseMessage = $this->truncateText(implode(' | ', $messageParts), 300);
+        $inserted = $this->insertIntoTable('bookings', array(
+            'name' => $lead['name'],
+            'email' => $lead['email'],
+            // Store ten digits so legacy VARCHAR(11) installations do not truncate it.
+            'phone' => $lead['phone'],
+            'mfrom' => 'Landing Page' . ($travelTiming !== '' ? ' - ' . $travelTiming : ''),
+            'mto' => $lead['package_name'],
+            'msg' => $databaseMessage,
+            'category' => 'landing-page',
+            'date' => $lead['travel_date'] !== '' ? $lead['travel_date'] : null,
+            'transportation' => $lead['travellers'],
+            'configuration' => $lead['hotel_category'],
+        ));
+
+        if (! $inserted) {
+            return array(
+                'stored' => false,
+                'admin_email_sent' => false,
+                'user_email_sent' => false,
+            );
+        }
+
+        $adminMessage = $this->buildEmailCard(
+            "New {$campaignLabel} Landing Page Enquiry",
+            array(
+                'Name' => $lead['name'],
+                'Phone' => $phoneDisplay,
+                'Email' => $lead['email'],
+                'Package' => $lead['package_name'],
+                'Travel Month' => $lead['travel_month'],
+                'Travel Date' => $lead['travel_date'],
+                'Travellers' => $lead['travellers'],
+                'Hotel Category' => $lead['hotel_category'],
+                'Displayed Price' => $lead['estimated_price'],
+                'Client Message' => $lead['message'],
+                'Form Location' => $lead['source'],
+            ),
+            'The enquiry is saved in the Bookings section of the admin panel.'
+        );
+
+        $adminEmailSent = $this->sendAdminNotification(
+            $this->notificationRecipient('booking_notification_email'),
+            $this->subjectLine("New {$campaignLabel} Landing Page Enquiry"),
+            $adminMessage,
+            $lead['email'],
+            $lead['name']
+        );
+
+        $userEmailSent = false;
+        if ($this->mailFlag('send_booking_auto_reply', true)) {
+            $clientMessage = $this->buildEmailCard(
+                "Thank You For Your {$campaignLabel} Enquiry",
+                array(
+                    'Traveller Name' => $lead['name'],
+                    'Package' => $lead['package_name'],
+                    'Travel Month' => $lead['travel_month'],
+                    'Travel Date' => $lead['travel_date'],
+                    'Travellers' => $lead['travellers'],
+                    'Hotel Category' => $lead['hotel_category'],
+                    'Displayed Price' => $lead['estimated_price'],
+                ),
+                'We have received your enquiry. A Tripjyada expert will contact you shortly to confirm availability and prepare your quotation.'
+            );
+
+            $userEmailSent = $this->sendEmail(
+                $lead['email'],
+                "Thank You for Your {$campaignLabel} Enquiry!",
+                $clientMessage,
+                array(
+                    'reply_to_email' => $this->mailSetting('reply_to_email', $this->resolveFromEmail()),
+                    'reply_to_name' => $this->mailSetting('company_name', 'Tripjyada'),
+                )
+            );
+        }
+
+        return array(
+            'stored' => true,
+            'admin_email_sent' => $adminEmailSent,
+            'user_email_sent' => $userEmailSent,
+        );
+    }
+
     public function send_test_mail($toEmail, $requestedBy = 'manual test')
     {
         $adminMessage = $this->buildEmailCard(
@@ -510,6 +616,15 @@ class Contacts_mdl extends CI_Model
 
         $value = trim((string) $value);
         return $value === '' ? $default : $value;
+    }
+
+    private function truncateText($value, $length)
+    {
+        if (function_exists('mb_substr')) {
+            return mb_substr((string) $value, 0, $length, 'UTF-8');
+        }
+
+        return substr((string) $value, 0, $length);
     }
 
     private function escape($value)

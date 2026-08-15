@@ -37,11 +37,16 @@
         	<div class="row">
         		<div class="col-sm-4">
         			<h5><b>{{y.mfrom}}</b> - <strong>{{y.mto}}</strong></h5>
-        			
-        			 <small>{{y.email}}</small>
+					<span class="booking-source" ng-if="y.category">{{y.category}}</span>
+					<small>{{y.email}}</small>
         		</div>
         		<div class="col-sm-8">
         			<b>{{y.name}}</b> | <a href="tel:{{y.phone}}"><i class="fa fa-phone"></i> {{y.phone}}</a><br>
+					<small ng-if="y.date || y.transportation || y.configuration">
+						<span ng-if="y.date">Travel: {{y.date}}</span>
+						<span ng-if="y.transportation"> • {{y.transportation}}</span>
+						<span ng-if="y.configuration"> • {{y.configuration}}</span>
+					</small><br ng-if="y.date || y.transportation || y.configuration">
         			<q>{{y.msg}}</q>
         			<small><i class="fa fa-clock-o"></i> {{y.timestamp}}</small>
         		</div>
@@ -60,6 +65,7 @@
    .cards h5 b{color: #0082ad}
    .cards q{font-weight:bold}
    .cards h5 strong{color: #00a200}
+   .booking-source{display:inline-block;margin:2px 6px 4px 0;padding:2px 7px;border-radius:10px;background:#f58220;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;}
    #hoeapp-wrapper {background: #ffffff;}
    .booking-toolbar{display:flex;gap:12px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;}
    .booking-toolbar .custom_addon{flex:1 1 320px;}

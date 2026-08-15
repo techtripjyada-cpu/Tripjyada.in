@@ -5,6 +5,7 @@ class Contact extends MX_Controller
     function __construct()
     {
         parent::__construct();
+        $this->require_admin_session();
         $this->load->model('mdl_contact');
     }
     function index()
@@ -53,8 +54,6 @@ class Contact extends MX_Controller
 
     function export_booking()
     {
-        $this->require_admin_session();
-
         $search = $this->input->get('search', true);
         $search = is_string($search) ? trim($search) : '';
         $date_from = $this->sanitize_export_date($this->input->get('date_from', true));
@@ -92,6 +91,10 @@ class Contact extends MX_Controller
         echo "<th>Phone</th>";
         echo "<th>From</th>";
         echo "<th>To</th>";
+        echo "<th>Source</th>";
+        echo "<th>Travel Date</th>";
+        echo "<th>Travellers</th>";
+        echo "<th>Hotel</th>";
         echo "<th>Message</th>";
         echo "<th>Timestamp</th>";
         echo "</tr>";
@@ -108,6 +111,10 @@ class Contact extends MX_Controller
                 echo "<td>" . htmlspecialchars(isset($row['phone']) ? $row['phone'] : '', ENT_QUOTES, 'UTF-8') . "</td>";
                 echo "<td>" . htmlspecialchars(isset($row['mfrom']) ? $row['mfrom'] : '', ENT_QUOTES, 'UTF-8') . "</td>";
                 echo "<td>" . htmlspecialchars(isset($row['mto']) ? $row['mto'] : '', ENT_QUOTES, 'UTF-8') . "</td>";
+                echo "<td>" . htmlspecialchars(isset($row['category']) ? $row['category'] : '', ENT_QUOTES, 'UTF-8') . "</td>";
+                echo "<td>" . htmlspecialchars(isset($row['date']) ? $row['date'] : '', ENT_QUOTES, 'UTF-8') . "</td>";
+                echo "<td>" . htmlspecialchars(isset($row['transportation']) ? $row['transportation'] : '', ENT_QUOTES, 'UTF-8') . "</td>";
+                echo "<td>" . htmlspecialchars(isset($row['configuration']) ? $row['configuration'] : '', ENT_QUOTES, 'UTF-8') . "</td>";
                 echo "<td>" . htmlspecialchars(isset($row['msg']) ? $row['msg'] : '', ENT_QUOTES, 'UTF-8') . "</td>";
                 echo "<td>" . htmlspecialchars(isset($row['timestamp']) ? $row['timestamp'] : '', ENT_QUOTES, 'UTF-8') . "</td>";
                 echo "</tr>";
@@ -115,7 +122,7 @@ class Contact extends MX_Controller
         }
         else
         {
-            echo "<tr><td colspan='8'>No bookings found.</td></tr>";
+            echo "<tr><td colspan='12'>No bookings found.</td></tr>";
         }
 
         echo "</table></body></html>";
