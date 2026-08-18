@@ -573,7 +573,6 @@
         <?php
         $aboutTeam = array(
           array('name' => 'Dharmendra Kumar Jha', 'role' => 'CEO', 'image' => 'Dharmendra.jpg', 'bio' => 'Driven by adventure and shaped by years of experience on the road, our CEO leads TripJyada with a commitment to creating journeys filled with culture, connection, and discovery.'),
-          array('name' => 'Prabhat Jha', 'role' => 'Co-Founder', 'image' => 'Prabatjha.jpg', 'bio' => 'A passionate traveler and visionary entrepreneur, our Co-Founder plays a key role in shaping TripJyada into a brand focused on meaningful experiences and unforgettable journeys.'),
           array('name' => 'Subhajit Rahut', 'role' => 'Chief Operating Officer', 'image' => 'Subhojit.jpg', 'bio' => 'As the Chief Operating Officer of TripJyada, he ensures every journey is thoughtfully planned and seamlessly executed, delivering exceptional travel experiences with precision and care.'),
           array('name' => 'Tapashya Pradhan', 'role' => 'Zonal Head', 'image' => 'Tapashya Pradhan.jpeg', 'bio' => 'As Zonal Head at TripJyada, he leads regional operations with a focus on delivering seamless travel experiences and strong local partnerships.')
         );

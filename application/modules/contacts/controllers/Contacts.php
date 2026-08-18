@@ -45,7 +45,8 @@ class Contacts extends MX_Controller
             $this->landing_package_prices(),
             array('Deluxe' => 0, 'Super Deluxe' => 8500, 'Premium' => 17500),
             'Bhutan',
-            'Please select a valid Bhutan package.'
+            'Please select a valid Bhutan package.',
+            'bhutan'
         );
     }
 
@@ -58,11 +59,12 @@ class Contacts extends MX_Controller
             $this->sdt_landing_package_prices(),
             array('Deluxe' => 0, 'Super Deluxe' => 3500, 'Premium' => 7000),
             'Sikkim & Darjeeling',
-            'Please select a valid Sikkim & Darjeeling package.'
+            'Please select a valid Sikkim & Darjeeling package.',
+            'std'
         );
     }
 
-    private function handle_landing_submission(array $packagePrices, array $tierAdditions, $campaignLabel, $invalidPackageMessage)
+    private function handle_landing_submission(array $packagePrices, array $tierAdditions, $campaignLabel, $invalidPackageMessage, $crmSlug)
     {
         if ($this->input->method(true) !== 'POST') {
             return $this->landing_json(array(
@@ -187,7 +189,7 @@ class Contacts extends MX_Controller
         );
 
         $this->load->model('contacts_mdl');
-        $result = $this->contacts_mdl->landing_booking($lead, $campaignLabel);
+        $result = $this->contacts_mdl->landing_booking($lead, $campaignLabel, $crmSlug);
 
         if (empty($result['stored'])) {
             return $this->landing_json(array(

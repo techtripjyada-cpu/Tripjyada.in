@@ -53,7 +53,7 @@ class MX_Controller
         /* copy a loader instance and initialize */
         $this->load = clone load_class('Loader');
         $this->load->initialize($this);
-        CI::$APP->config->load('tripjyada_mail', true);
+        CI::$APP->config->load('tripjyada_mail');
         $mailConfig = (array) CI::$APP->config->item('tripjyada_mail');
 
         $supportEmail = !empty($mailConfig['support_email']) ? $mailConfig['support_email'] : 'info@tripjyada.com';

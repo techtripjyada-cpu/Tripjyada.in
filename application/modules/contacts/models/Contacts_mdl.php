@@ -4,6 +4,7 @@ class Contacts_mdl extends CI_Model
 {
     private $smtpConfig = array();
     private $mailConfig = array();
+    private $crmConfig = array();
 
     public function __construct()
     {
@@ -11,9 +12,11 @@ class Contacts_mdl extends CI_Model
         $this->load->database();
         $this->load->config('tripjyada_smtp');
         $this->load->config('tripjyada_mail');
+        $this->load->config('tripjyada_crm');
 
         $this->smtpConfig = (array) $this->config->item('tripjyada_smtp');
         $this->mailConfig = (array) $this->config->item('tripjyada_mail');
+        $this->crmConfig = (array) $this->config->item('tripjyada_crm');
     }
 
     public function insert()
@@ -331,7 +334,7 @@ class Contacts_mdl extends CI_Model
      * Mail failures are reported separately so a temporary SMTP outage never
      * causes a successfully stored lead to be lost or submitted repeatedly.
      */
-    public function landing_booking(array $lead, $campaignLabel = 'Bhutan')
+    public function landing_booking(array $lead, $campaignLabel = 'Bhutan', $crmSlug = '')
     {
         $phoneDisplay = '+91 ' . $lead['phone'];
         $travelTiming = $lead['travel_date'] !== '' ? $lead['travel_date'] : $lead['travel_month'];
@@ -372,8 +375,10 @@ class Contacts_mdl extends CI_Model
             );
         }
 
+        // Only the admin is notified here (no traveller auto-reply): a single
+        // reliable send to the inbox that actually needs to act on the lead.
         $adminMessage = $this->buildEmailCard(
-            "New {$campaignLabel} Landing Page Enquiry",
+            "New Lead Received – {$campaignLabel}",
             array(
                 'Name' => $lead['name'],
                 'Phone' => $phoneDisplay,
@@ -392,44 +397,72 @@ class Contacts_mdl extends CI_Model
 
         $adminEmailSent = $this->sendAdminNotification(
             $this->notificationRecipient('booking_notification_email'),
-            $this->subjectLine("New {$campaignLabel} Landing Page Enquiry"),
+            $this->subjectLine("New Lead Received – {$campaignLabel}"),
             $adminMessage,
             $lead['email'],
             $lead['name']
         );
 
-        $userEmailSent = false;
-        if ($this->mailFlag('send_booking_auto_reply', true)) {
-            $clientMessage = $this->buildEmailCard(
-                "Thank You For Your {$campaignLabel} Enquiry",
-                array(
-                    'Traveller Name' => $lead['name'],
-                    'Package' => $lead['package_name'],
-                    'Travel Month' => $lead['travel_month'],
-                    'Travel Date' => $lead['travel_date'],
-                    'Travellers' => $lead['travellers'],
-                    'Hotel Category' => $lead['hotel_category'],
-                    'Displayed Price' => $lead['estimated_price'],
-                ),
-                'We have received your enquiry. A Tripjyada expert will contact you shortly to confirm availability and prepare your quotation.'
-            );
-
-            $userEmailSent = $this->sendEmail(
-                $lead['email'],
-                "Thank You for Your {$campaignLabel} Enquiry!",
-                $clientMessage,
-                array(
-                    'reply_to_email' => $this->mailSetting('reply_to_email', $this->resolveFromEmail()),
-                    'reply_to_name' => $this->mailSetting('company_name', 'Tripjyada'),
-                )
-            );
-        }
+        // Best-effort push to the partner CRM: the lead is already saved and the
+        // admin already notified above, so a slow or unreachable CRM API must
+        // never turn a successfully captured lead into a failed submission.
+        $crmSynced = $this->pushLeadToCrm($lead, $crmSlug);
 
         return array(
             'stored' => true,
             'admin_email_sent' => $adminEmailSent,
-            'user_email_sent' => $userEmailSent,
+            'user_email_sent' => false,
+            'crm_synced' => $crmSynced,
         );
+    }
+
+    private function pushLeadToCrm(array $lead, $crmSlug)
+    {
+        $endpointKey = $crmSlug === 'std' ? 'lead_api_std' : 'lead_api_bhutan';
+        $endpoint = isset($this->crmConfig[$endpointKey]) ? (string) $this->crmConfig[$endpointKey] : '';
+
+        if ($endpoint === '' || $crmSlug === '') {
+            return false;
+        }
+
+        $payload = array(
+            'name' => $lead['name'],
+            'email' => $lead['email'],
+            'phone' => $lead['phone'],
+            'travellers' => $lead['travellers'],
+            'source' => $lead['source'],
+            'package_name' => $lead['package_name'],
+            'hotel_category' => $lead['hotel_category'],
+            'travel_month' => $lead['travel_month'] !== '' ? $lead['travel_month'] : null,
+            // The landing form only accepts submissions with consent already
+            // checked, so a lead reaching this point always implies consent.
+            'privacy_consent' => 1,
+        );
+
+        $ch = curl_init($endpoint);
+        curl_setopt_array($ch, array(
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => json_encode($payload),
+            CURLOPT_HTTPHEADER => array('Content-Type: application/json', 'Accept: application/json'),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => isset($this->crmConfig['lead_api_timeout']) ? (int) $this->crmConfig['lead_api_timeout'] : 8,
+            CURLOPT_CONNECTTIMEOUT => 5,
+        ));
+
+        $response = curl_exec($ch);
+        $curlError = curl_error($ch);
+        $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($response === false || $statusCode < 200 || $statusCode >= 300) {
+            log_message(
+                'error',
+                "CRM lead push failed for {$crmSlug} (status {$statusCode}): " . ($curlError !== '' ? $curlError : $response)
+            );
+            return false;
+        }
+
+        return true;
     }
 
     public function send_test_mail($toEmail, $requestedBy = 'manual test')
