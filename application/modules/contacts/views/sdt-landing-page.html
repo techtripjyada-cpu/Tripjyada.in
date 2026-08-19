@@ -34,7 +34,7 @@
                 <div class="proof"><span>★ 4.9/5 rating</span><span>✓ 30,000+ movements</span><span>✓ Local destination
                         team</span></div>
             </div>
-            <form class="lead js-lead-form" action="sdt-landing-page/submit" method="post">
+            <form class="lead js-lead-form" action="sikkim-darjeeling-tour-package/submit" method="post">
                 <input type="hidden" name="source" value="hero">
                 <input type="hidden" name="package_name" value="Sikkim Darjeeling Special Offer">
                 <input type="hidden" name="hotel_category" value="Deluxe">
@@ -343,7 +343,7 @@
                     <div><strong id="modalTitle">Plan your Sikkim &amp; Darjeeling trip</strong><span
                             id="modalPrice">Get a customised quotation</span></div>
                 </div>
-                <form class="js-lead-form" action="sdt-landing-page/submit" method="post">
+                <form class="js-lead-form" action="sikkim-darjeeling-tour-package/submit" method="post">
                     <input type="hidden" name="source" value="modal">
                     <input type="hidden" name="package_name" id="modalPackage" value="Custom Sikkim Darjeeling Trip">
                     <label class="hp-field" aria-hidden="true">Website<input name="website" tabindex="-1"
@@ -415,7 +415,7 @@
         };
         const qs = [["Do Indian citizens need a permit for Sikkim?", "Most of Sikkim needs no permit; a free Inner Line Permit is required only for restricted areas like Nathula, Tsomgo Lake and North Sikkim, which our team arranges."], ["What does the Monsoon Special offer include?", "Selected Sikkim & Darjeeling packages receive up to 15% savings; final pricing depends on dates and hotel category."], ["What is the best time to visit Sikkim & Darjeeling?", "March–June and September–December are popular, with clear mountain views; winter brings snow to North Sikkim."], ["Is the Inner Line Permit included?", "Yes, our team arranges the ILP for North Sikkim and for Tsomgo Lake / Nathula as part of your itinerary."], ["Can I enter by road?", "Yes, most journeys begin from Bagdogra Airport or NJP Railway Station via Siliguri."], ["Can I fly directly?", "Bagdogra is the nearest major airport; Gangtok's Pakyong airport also operates limited flights, subject to schedule."], ["Are meals included?", "Meal plans vary; breakfast is common and vegetarian or Jain requirements can be arranged."], ["Can the itinerary be customised?", "Yes, duration, hotels, vehicle, meals and pace can all be customised."], ["Is Tsomgo Lake / Nathula suitable for everyone?", "It involves a high-altitude drive; we suggest a comfortable pace and can propose alternatives based on age and fitness."], ["What support is included?", "You receive pre-trip assistance, local coordination and 24×7 emergency support."]];
         document.getElementById("faqList").innerHTML = qs.map((q, i) => `<details ${i === 0 ? "open" : ""}><summary><span>${String(i + 1).padStart(2, "0")}</span>${q[0]}<b>+</b></summary><p>${q[1]}</p></details>`).join("");
-        const siteRoot = window.location.pathname.replace(/\/sdt-landing-page\/?$/, "/");
+        const siteRoot = window.location.pathname.replace(/\/sikkim-darjeeling-tour-package\/?$/, "/");
         const partnerBase = siteRoot + "assets/images/landing/partners/";
         document.querySelectorAll("[data-site-path]").forEach(link => link.href = siteRoot + link.dataset.sitePath);
         document.querySelectorAll("[data-site-asset]").forEach(asset => asset.src = siteRoot + asset.dataset.siteAsset);
