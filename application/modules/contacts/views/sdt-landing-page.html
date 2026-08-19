@@ -49,15 +49,18 @@
                 <label>Phone<input required name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="24"
                         placeholder="+91 98765 43210"></label>
                 <div class="two">
-                    <label>Travel month<select name="travel_month">
-                            <option>August 2026</option>
-                            <option>September 2026</option>
-                            <option>October 2026</option>
-                        </select></label>
+                    <label>Travel date<input name="travel_date" type="date" id="heroTravelDate"></label>
                     <label>Travellers<select name="travellers">
-                            <option value="2 People">2 People</option>
-                            <option value="3-5 People">3–5 People</option>
-                            <option value="6+ People">6+ People</option>
+                            <option value="1">1 Traveller</option>
+                            <option value="2" selected>2 Travellers</option>
+                            <option value="3">3 Travellers</option>
+                            <option value="4">4 Travellers</option>
+                            <option value="5">5 Travellers</option>
+                            <option value="6">6 Travellers</option>
+                            <option value="7">7 Travellers</option>
+                            <option value="8">8 Travellers</option>
+                            <option value="9">9 Travellers</option>
+                            <option value="10+">10+ Travellers</option>
                         </select></label>
                 </div>
                 <label class="consent"><input required name="privacy_consent" type="checkbox" value="1"><span>I agree
@@ -356,9 +359,16 @@
                                 inputmode="tel" maxlength="24" placeholder="+91 98765 43210"></label><label>Travel
                             date<input required name="travel_date" type="date" id="modalTravelDate"></label></div>
                     <div class="two"><label>Traveller count<select name="travellers">
-                                <option value="2 People">2 People</option>
-                                <option value="3-5 People">3–5 People</option>
-                                <option value="6+ People">6+ People</option>
+                                <option value="1">1 Traveller</option>
+                                <option value="2" selected>2 Travellers</option>
+                                <option value="3">3 Travellers</option>
+                                <option value="4">4 Travellers</option>
+                                <option value="5">5 Travellers</option>
+                                <option value="6">6 Travellers</option>
+                                <option value="7">7 Travellers</option>
+                                <option value="8">8 Travellers</option>
+                                <option value="9">9 Travellers</option>
+                                <option value="10+">10+ Travellers</option>
                             </select></label><label>Hotel category<select name="hotel_category" id="modalHotel">
                                 <option>Deluxe</option>
                                 <option>Super Deluxe</option>
@@ -493,6 +503,7 @@
         lightbox.onclick = e => { if (e.target === lightbox) closeLightbox(); };
         document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
         document.getElementById("modalTravelDate").min = new Date().toISOString().slice(0, 10);
+        document.getElementById("heroTravelDate").min = new Date().toISOString().slice(0, 10);
         function submissionEndpoint() {
             return window.location.pathname.replace(/\/+$/, "") + "/submit";
         }

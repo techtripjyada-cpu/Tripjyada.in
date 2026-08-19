@@ -148,7 +148,7 @@ class Contacts extends MX_Controller
         }
 
         $travellers = $this->landing_post_value('travellers');
-        $allowedTravellers = array('2 People', '3-5 People', '6+ People');
+        $allowedTravellers = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10+');
         if (! in_array($travellers, $allowedTravellers, true)) {
             return $this->landing_json(array('ok' => false, 'message' => 'Please select a valid traveller count.'), 422);
         }

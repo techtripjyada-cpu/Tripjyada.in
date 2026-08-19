@@ -46,15 +46,18 @@
                 <label>Phone<input required name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="24"
                         placeholder="+91 98765 43210"></label>
                 <div class="two">
-                    <label>Travel month<select name="travel_month">
-                            <option>August 2026</option>
-                            <option>September 2026</option>
-                            <option>October 2026</option>
-                        </select></label>
+                    <label>Travel date<input name="travel_date" type="date" id="heroTravelDate"></label>
                     <label>Travellers<select name="travellers">
-                            <option value="2 People">2 People</option>
-                            <option value="3-5 People">3–5 People</option>
-                            <option value="6+ People">6+ People</option>
+                            <option value="1">1 Traveller</option>
+                            <option value="2" selected>2 Travellers</option>
+                            <option value="3">3 Travellers</option>
+                            <option value="4">4 Travellers</option>
+                            <option value="5">5 Travellers</option>
+                            <option value="6">6 Travellers</option>
+                            <option value="7">7 Travellers</option>
+                            <option value="8">8 Travellers</option>
+                            <option value="9">9 Travellers</option>
+                            <option value="10+">10+ Travellers</option>
                         </select></label>
                 </div>
                 <label class="consent"><input required name="privacy_consent" type="checkbox" value="1"><span>I agree
@@ -332,11 +335,22 @@
                     <div class="two"><label>Phone<input required name="phone" type="tel" autocomplete="tel"
                                 inputmode="tel" maxlength="24" placeholder="+91 98765 43210"></label><label>Travel
                             date<input required name="travel_date" type="date" id="modalTravelDate"></label></div>
-                    <label>Traveller count<select name="travellers">
-                            <option value="2 People">2 People</option>
-                            <option value="3-5 People">3–5 People</option>
-                            <option value="6+ People">6+ People</option>
-                        </select></label><input type="hidden" name="hotel_category" id="modalHotel" value="Deluxe">
+                    <div class="two"><label>Traveller count<select name="travellers">
+                                <option value="1">1 Traveller</option>
+                                <option value="2" selected>2 Travellers</option>
+                                <option value="3">3 Travellers</option>
+                                <option value="4">4 Travellers</option>
+                                <option value="5">5 Travellers</option>
+                                <option value="6">6 Travellers</option>
+                                <option value="7">7 Travellers</option>
+                                <option value="8">8 Travellers</option>
+                                <option value="9">9 Travellers</option>
+                                <option value="10+">10+ Travellers</option>
+                            </select></label><label>Hotel category<select name="hotel_category" id="modalHotel">
+                                <option>Deluxe</option>
+                                <option>Super Deluxe</option>
+                                <option>Premium</option>
+                            </select></label></div>
                     <label>Message<textarea name="message" rows="3" maxlength="1000"
                             placeholder="Tell us your preferences"></textarea></label>
                     <label class="consent"><input required name="privacy_consent" type="checkbox" value="1"><span>I
@@ -357,10 +371,16 @@
         packs.forEach((p, i) => {
             const c = document.createElement("article");
             c.className = "card";
-            c.innerHTML = `<div class="photo" style="background-image:url('${pics[p[5]]}')"><span>${p[4]}</span><b>Save up to 15%</b></div><div class="body"><div class="meta"><span>${p[0]}</span><i>★ 4.${9 - i % 3}</i></div><h3>${p[1]}</h3><p class="route">⌖ ${p[2]}</p><ul class="features"><li>✓ Verified stay & breakfast</li><li>✓ Private transfers & sightseeing</li><li>✓ Permit support + 24×7 assistance</li></ul><div class="price"><small>Independence Day price</small><strong>${money(p[3])}</strong> <span>/person</span></div><div class="cardBtns"><a href="tel:+919558515518" aria-label="Call"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2Z"/></svg></a><button class="callback" type="button">Request Callback</button><a class="wa" aria-label="WhatsApp" href="https://wa.me/919046248269?text=${encodeURIComponent(`Hi Tripjyada, I'm interested in the ${p[1]} package. Please share more details.`)}"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.87 9.87 0 1 1 8.37 4.63M12.05 0A11.9 11.9 0 0 0 .16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65A11.9 11.9 0 1 0 12.05 0"/></svg></a></div></div>`;
+            c.innerHTML = `<div class="photo" style="background-image:url('${pics[p[5]]}')"><span>${p[4]}</span><b>Save up to 15%</b></div><div class="body"><div class="meta"><span>${p[0]}</span><i>★ 4.${9 - i % 3}</i></div><h3>${p[1]}</h3><p class="route">⌖ ${p[2]}</p><div class="tiers">${["Deluxe", "Super Deluxe", "Premium"].map((t, x) => `<label><input type="radio" name="tier${i}" value="${x}" ${x === 0 ? "checked" : ""}>${t}</label>`).join("")}</div><ul class="features"><li>✓ Verified stay & breakfast</li><li>✓ Private transfers & sightseeing</li><li>✓ Permit support + 24×7 assistance</li></ul><div class="price"><small>Independence Day price</small><strong>${money(p[3])}</strong> <span>/person</span></div><div class="cardBtns"><a href="tel:+919558515518" aria-label="Call"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2Z"/></svg></a><button class="callback" type="button">Request Callback</button><a class="wa" aria-label="WhatsApp" href="https://wa.me/919046248269?text=${encodeURIComponent(`Hi Tripjyada, I'm interested in the ${p[1]} package. Please share more details.`)}"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.87 9.87 0 1 1 8.37 4.63M12.05 0A11.9 11.9 0 0 0 .16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65A11.9 11.9 0 1 0 12.05 0"/></svg></a></div></div>`;
             grid.appendChild(c);
+            c.querySelectorAll("input").forEach(r => r.addEventListener("change", e => {
+                const add = [0, 8500, 17500][+e.target.value];
+                c.querySelector(".price strong").textContent = money(p[3] + add);
+            }));
             c.querySelector(".callback").addEventListener("click", () => {
-                openModal(p[1], money(p[3]), pics[p[5]]);
+                const tierIndex = +c.querySelector("input:checked").value;
+                const tier = ["Deluxe", "Super Deluxe", "Premium"][tierIndex];
+                openModal(p[1], c.querySelector(".price strong").textContent, pics[p[5]], tier);
             });
         });
         const reviews = [["Priya Sharma", "Ahmedabad", "Permits, hotels and our vehicle were handled perfectly. My parents enjoyed Bhutan without stress.", 47], ["Arjun & Meera", "Bengaluru", "The route never felt rushed and the team checked on us throughout the trip.", 12], ["Rohit Agarwal", "Kolkata", "They understood our child’s food needs and adapted the plan whenever required.", 11], ["Neha Patel", "Surat", "Everything was explained clearly—from the border process to Tiger’s Nest.", 32], ["Ankit Jain", "Jaipur", "Vegetarian meals were planned well and our group always felt supported.", 15], ["Kavita Desai", "Mumbai", "The senior-friendly pace, comfortable stays and patient driver were excellent.", 44], ["Sourav Ghosh", "Kolkata", "Transparent quotation and excellent ground coordination. We always knew whom to contact.", 5], ["Riya & Kunal", "Delhi", "The small personal touches made our Bhutan honeymoon genuinely special.", 49], ["Mehul Shah", "Vadodara", "Permit assistance and regular updates gave our family total confidence.", 13], ["Sneha Iyer", "Chennai", "A balanced itinerary with enough time to actually enjoy Bhutan.", 45], ["Amit Verma", "Lucknow", "Excellent vehicle, dependable driver and very quick support.", 8], ["Pooja Bansal", "Gurugram", "The hotel choices and route planning were exactly what we wanted.", 48]];
@@ -414,14 +434,26 @@
         });
         const overlay = document.getElementById("overlay");
         const modalPackage = document.getElementById("modalPackage");
-        function openModal(t = "Plan your Bhutan trip", p = "Get a customised quotation", im = pics[0]) {
+        const modalHotel = document.getElementById("modalHotel");
+        function updateModalPrice() {
+            const selectedPackage = packs.find(pack => pack[1] === modalPackage.value);
+            if (!selectedPackage) {
+                document.getElementById("modalPrice").textContent = "Get a customised quotation";
+                return;
+            }
+            const tierAddition = { Deluxe: 0, "Super Deluxe": 8500, Premium: 17500 }[modalHotel.value] || 0;
+            document.getElementById("modalPrice").textContent = money(selectedPackage[3] + tierAddition);
+        }
+        function openModal(t = "Plan your Bhutan trip", p = "Get a customised quotation", im = pics[0], tier = "Deluxe") {
             document.getElementById("modalTitle").textContent = t;
             document.getElementById("modalPrice").textContent = p;
             document.getElementById("modalImg").src = im;
             modalPackage.value = t === "Plan your Bhutan trip" ? "Custom Bhutan Trip" : t;
+            modalHotel.value = tier;
             overlay.classList.add("show");
             document.body.style.overflow = "hidden";
         }
+        modalHotel.addEventListener("change", updateModalPrice);
         document.querySelectorAll(".openModal").forEach(x => {
             x.onclick = () => openModal();
             x.onkeydown = e => { if (e.key === "Enter" || e.key === " ") openModal(); };
@@ -431,6 +463,7 @@
         document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
         function closeModal() { overlay.classList.remove("show"); document.body.style.overflow = ""; }
         document.getElementById("modalTravelDate").min = new Date().toISOString().slice(0, 10);
+        document.getElementById("heroTravelDate").min = new Date().toISOString().slice(0, 10);
         function submissionEndpoint() {
             return window.location.pathname.replace(/\/+$/, "") + "/submit";
         }
