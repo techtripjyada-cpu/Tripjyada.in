@@ -504,7 +504,11 @@
             });
         });
         function tick() {
-            const x = Math.max(0, new Date("2026-08-15T23:59:59+05:30") - Date.now());
+            // Rolling weekly countdown: resets to a fresh 7 days every week
+            // instead of expiring, for ongoing "limited time" urgency.
+            const weekMs = 7 * 24 * 60 * 60 * 1000;
+            const refStart = new Date("2026-08-01T00:00:00+05:30").getTime();
+            const x = weekMs - ((Date.now() - refStart) % weekMs);
             const v = [Math.floor(x / 864e5), Math.floor(x / 36e5) % 24, Math.floor(x / 6e4) % 60, Math.floor(x / 1e3) % 60];
             const u = ["d", "h", "m", "s"];
             document.getElementById("timer").innerHTML = v.map((n, i) => `<b>${n}${u[i]}</b>`).join("");
