@@ -126,7 +126,7 @@ textarea {
 
 .hero {
     min-height: 640px;
-    background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Kanchenjunga_range_from_Tiger_Hill%2C_Darjeeling.jpg/1280px-Kanchenjunga_range_from_Tiger_Hill%2C_Darjeeling.jpg") center/cover;
+    background: url("../images/himalayan-escape-images/sdt/hero-banner.webp") center/cover;
     position: relative;
     color: #fff
 }
