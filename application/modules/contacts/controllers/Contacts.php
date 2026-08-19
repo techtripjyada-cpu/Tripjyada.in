@@ -447,19 +447,22 @@ class Contacts extends MX_Controller
         );
     }
 
+    /**
+     * Base (2-pax) price per route, used for server-side validation and the
+     * estimated price shown in the admin email. The card itself shows the
+     * exact price for whichever pax count (2/4/6) the visitor selected;
+     * this is only a "starting from" figure since the actual per-person
+     * rate depends on group size.
+     */
     private function sdt_landing_package_prices()
     {
         return array(
-            'Sikkim Darjeeling Special Offer' => 14999,
-            'Sikkim Darjeeling Quick Escape' => 14999,
-            'Classic Sikkim Darjeeling Discovery' => 18499,
-            'Sikkim Darjeeling Family Holiday' => 21999,
-            'Complete Sikkim Darjeeling Circuit' => 26999,
-            'North Sikkim Explorer' => 20499,
-            'Darjeeling Tea & Toy Train Special' => 12999,
-            'Romantic Sikkim Darjeeling Retreat' => 19499,
-            'Sikkim Darjeeling Festival Journey' => 22999,
-            'Grand Sikkim Darjeeling Experience' => 29999,
+            '2N Gangtok & 2N Darjeeling' => 20303,
+            '3N Gangtok & 2N Darjeeling' => 24299,
+            'Gangtok, Lachung, Pelling & Darjeeling Grand Circuit' => 48707,
+            'Gangtok, Pelling & Darjeeling' => 30023,
+            'Gangtok, Lachung & Darjeeling' => 40067,
+            'Gangtok, Lachung, Pelling & Darjeeling Extended' => 49571,
             'Custom Sikkim Darjeeling Trip' => null,
         );
     }

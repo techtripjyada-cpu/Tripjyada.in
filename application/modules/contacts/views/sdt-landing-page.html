@@ -29,14 +29,14 @@
                 <h1>The Himalayas feel closer.<br><span>Travel it for less.</span></h1>
                 <p class="heroCopy">Alpine lakes, monasteries, tea gardens and toy trains—planned by a team that
                     understands Sikkim and Darjeeling.</p>
-                <div class="from"><small>From</small><del>₹17,999</del><strong>₹14,999</strong><span>/person</span>
+                <div class="from"><small>From</small><del>₹17,499</del><strong>₹15,011</strong><span>/person</span>
                 </div>
                 <div class="proof"><span>★ 4.9/5 rating</span><span>✓ 30,000+ movements</span><span>✓ Local destination
                         team</span></div>
             </div>
             <form class="lead js-lead-form" action="sikkim-darjeeling-tour-package/submit" method="post">
                 <input type="hidden" name="source" value="hero">
-                <input type="hidden" name="package_name" value="Sikkim Darjeeling Special Offer">
+                <input type="hidden" name="package_name" value="2N Gangtok & 2N Darjeeling">
                 <input type="hidden" name="hotel_category" value="Deluxe">
                 <label class="hp-field" aria-hidden="true">Website<input name="website" tabindex="-1"
                         autocomplete="off"></label>
@@ -200,9 +200,6 @@
             <article class="galleryItem" tabindex="0" role="button" aria-label="Expand photo"><img
                     src="assets/images/reviews-images/sdt/gallery-7.webp" alt="Family at a snow point" loading="lazy"
                     decoding="async"><span>Snow Point, North Sikkim</span></article>
-            <article class="galleryItem" tabindex="0" role="button" aria-label="Expand photo"><img
-                    src="assets/images/reviews-images/sdt/gallery-8.webp" alt="Family at a hilltop monastery"
-                    loading="lazy" decoding="async"><span>Hilltop Monastery View</span></article>
         </div>
     </section>
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded photo"><button
@@ -362,7 +359,7 @@
                             date<input required name="travel_date" type="date" id="modalTravelDate"></label></div>
                     <label>City<input name="city" autocomplete="address-level2" maxlength="80"
                             placeholder="Your city"></label>
-                    <label>Traveller count<select name="travellers">
+                    <label>Traveller count<select name="travellers" id="modalTravellers">
                             <option value="1">1 Traveller</option>
                             <option value="2" selected>2 Travellers</option>
                             <option value="3">3 Travellers</option>
@@ -387,17 +384,29 @@
         </div>
     </div>
     <script>
-        const pics = ["assets/images/himalayan-escape-images/sdt-card-image/sikkim-darjeeling-quick-escape.webp", "assets/images/himalayan-escape-images/sdt-card-image/classic-sikkim-darjeeling-discovery.webp", "assets/images/himalayan-escape-images/sdt-card-image/sikkim-darjeeling-family-holiday.webp", "assets/images/himalayan-escape-images/sdt-card-image/complete-sikkim-darjeeling-circuit.webp", "assets/images/himalayan-escape-images/sdt-card-image/north-sikkim-explorer.webp", "assets/images/himalayan-escape-images/sdt-card-image/darjeeling-tea-and-toy-train-special.webp", "assets/images/himalayan-escape-images/sdt-card-image/romantic-sikkim-darjeeling-retreat.webp", "assets/images/himalayan-escape-images/sdt-card-image/sikkim-darjeeling-festival-journey.webp", "assets/images/himalayan-escape-images/sdt-card-image/grand-sikkim-darjeeling-experience.webp"];
-        const packs = [["4N/5D", "Sikkim Darjeeling Quick Escape", "Gangtok • Darjeeling", 14999, "Couples", 0], ["5N/6D", "Classic Sikkim Darjeeling Discovery", "Gangtok • Tsomgo Lake • Pelling • Darjeeling", 18499, "Bestseller", 1], ["6N/7D", "Sikkim Darjeeling Family Holiday", "NJP • Gangtok • Tsomgo Lake • Darjeeling", 21999, "Family Pick", 2], ["7N/8D", "Complete Sikkim Darjeeling Circuit", "Gangtok • Lachung • Pelling • Darjeeling", 26999, "Complete", 3], ["5N/6D", "North Sikkim Explorer", "Gangtok • Lachen • Lachung • Yumthang Valley", 20499, "Snow Special", 4], ["4N/5D", "Darjeeling Tea & Toy Train Special", "Darjeeling • Mirik • Kurseong", 12999, "Heritage", 5], ["5N/6D", "Romantic Sikkim Darjeeling Retreat", "Gangtok • Pelling • Darjeeling", 19499, "Honeymoon", 6], ["6N/7D", "Sikkim Darjeeling Festival Journey", "Gangtok • Darjeeling • Kalimpong", 22999, "Culture", 7], ["7N/8D", "Grand Sikkim Darjeeling Experience", "Gangtok • Lachen • Lachung • Pelling • Darjeeling", 29999, "Premium", 8]];
+        const pics = ["assets/images/himalayan-escape-images/sdt-card-image/sikkim-darjeeling-quick-escape.webp", "assets/images/himalayan-escape-images/sdt-card-image/classic-sikkim-darjeeling-discovery.webp", "assets/images/himalayan-escape-images/sdt-card-image/grand-sikkim-darjeeling-experience.webp", "assets/images/himalayan-escape-images/sdt-card-image/sikkim-darjeeling-family-holiday.webp", "assets/images/himalayan-escape-images/sdt-card-image/north-sikkim-explorer.webp", "assets/images/himalayan-escape-images/sdt-card-image/complete-sikkim-darjeeling-circuit.webp"];
+        const packs = [
+            { nights: "4N/5D", name: "2N Gangtok & 2N Darjeeling", route: "Gangtok • Darjeeling", prices: { 2: 20303, 4: 15011, 6: 15119 }, tag: "Popular", pic: 0 },
+            { nights: "5N/6D", name: "3N Gangtok & 2N Darjeeling", route: "Gangtok • Darjeeling", prices: { 2: 24299, 4: 18035, 6: 18251 }, tag: "Bestseller", pic: 1 },
+            { nights: "8N/9D", name: "Gangtok, Lachung, Pelling & Darjeeling Grand Circuit", route: "Gangtok • Lachung • Pelling • Darjeeling", prices: { 2: 48707, 4: 33803, 6: 30671 }, tag: "Complete", pic: 2 },
+            { nights: "6N/7D", name: "Gangtok, Pelling & Darjeeling", route: "Gangtok • Pelling • Darjeeling", prices: { 2: 30023, 4: 22139 }, tag: "Family Pick", pic: 3 },
+            { nights: "7N/8D", name: "Gangtok, Lachung & Darjeeling", route: "Gangtok • Lachung • Darjeeling", prices: { 2: 40067, 4: 18899, 6: 26351 }, tag: "Snow Special", pic: 4 },
+            { nights: "9N/10D", name: "Gangtok, Lachung, Pelling & Darjeeling Extended", route: "Gangtok • Lachung • Pelling • Darjeeling", prices: { 2: 49571, 4: 35423, 6: 33479 }, tag: "Premium", pic: 5 }
+        ];
         const money = n => "₹" + n.toLocaleString("en-IN");
         const grid = document.getElementById("packageGrid");
         packs.forEach((p, i) => {
             const c = document.createElement("article");
             c.className = "card";
-            c.innerHTML = `<div class="photo" style="background-image:url('${pics[p[5]]}')"><span>${p[4]}</span><b>Save up to 15%</b></div><div class="body"><div class="meta"><span>${p[0]}</span><i>★ 4.${9 - i % 3}</i></div><h3>${p[1]}</h3><p class="route">⌖ ${p[2]}</p><ul class="features"><li>✓ Verified stay & breakfast</li><li>✓ Private transfers & sightseeing</li><li>✓ Permit support + 24×7 assistance</li></ul><div class="price"><small>Sikkim &amp; Darjeeling sale price</small><strong>${money(p[3])}</strong> <span>/person</span></div><div class="cardBtns"><a href="tel:+919083701454" aria-label="Call"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2Z"/></svg></a><button class="callback" type="button">Request Callback</button><a class="wa" aria-label="WhatsApp" href="https://wa.me/919046248269?text=${encodeURIComponent(`Hi Tripjyada, I'm interested in the ${p[1]} package. Please share more details.`)}"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.87 9.87 0 1 1 8.37 4.63M12.05 0A11.9 11.9 0 0 0 .16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65A11.9 11.9 0 1 0 12.05 0"/></svg></a></div></div>`;
+            const paxOptions = Object.keys(p.prices).map(Number);
+            c.innerHTML = `<div class="photo" style="background-image:url('${pics[p.pic]}')"><span>${p.tag}</span><b>Save up to 15%</b></div><div class="body"><div class="meta"><span>${p.nights}</span><i>★ 4.${9 - i % 3}</i></div><h3>${p.name}</h3><p class="route">⌖ ${p.route}</p><div class="tiers">${paxOptions.map((n, x) => `<label><input type="radio" name="pax${i}" value="${n}" ${x === 0 ? "checked" : ""}>${n} Pax</label>`).join("")}</div><ul class="features"><li>✓ Verified stay & breakfast</li><li>✓ Private transfers & sightseeing</li><li>✓ Permit support + 24×7 assistance</li></ul><div class="price"><small>Sikkim &amp; Darjeeling sale price</small><strong>${money(p.prices[paxOptions[0]])}</strong> <span>/person</span></div><div class="cardBtns"><a href="tel:+919083701454" aria-label="Call"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2Z"/></svg></a><button class="callback" type="button">Request Callback</button><a class="wa" aria-label="WhatsApp" href="https://wa.me/919046248269?text=${encodeURIComponent(`Hi Tripjyada, I'm interested in the ${p.name} package. Please share more details.`)}"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.87 9.87 0 1 1 8.37 4.63M12.05 0A11.9 11.9 0 0 0 .16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65A11.9 11.9 0 1 0 12.05 0"/></svg></a></div></div>`;
             grid.appendChild(c);
+            c.querySelectorAll("input").forEach(r => r.addEventListener("change", e => {
+                c.querySelector(".price strong").textContent = money(p.prices[+e.target.value]);
+            }));
             c.querySelector(".callback").addEventListener("click", () => {
-                openModal(p[1], money(p[3]), pics[p[5]]);
+                const selectedPax = +c.querySelector("input:checked").value;
+                openModal(p.name, c.querySelector(".price strong").textContent, pics[p.pic], selectedPax);
             });
         });
         const reviews = [["Priya Sharma", "Ahmedabad", "Permits, hotels and our vehicle were handled perfectly. My parents enjoyed Sikkim without stress.", 47], ["Arjun & Meera", "Bengaluru", "The route never felt rushed and the team checked on us throughout the trip.", 12], ["Rohit Agarwal", "Kolkata", "They understood our child’s food needs and adapted the plan whenever required.", 11], ["Neha Patel", "Surat", "Everything was explained clearly—from the toy train booking to Tsomgo Lake.", 32], ["Ankit Jain", "Jaipur", "Vegetarian meals were planned well and our group always felt supported.", 15], ["Kavita Desai", "Mumbai", "The senior-friendly pace, comfortable stays and patient driver were excellent.", 44], ["Sourav Ghosh", "Kolkata", "Transparent quotation and excellent ground coordination. We always knew whom to contact.", 5], ["Riya & Kunal", "Delhi", "The small personal touches made our Sikkim Darjeeling honeymoon genuinely special.", 49], ["Mehul Shah", "Vadodara", "Permit assistance for Tsomgo Lake and regular updates gave our family total confidence.", 13], ["Sneha Iyer", "Chennai", "A balanced itinerary with enough time to actually enjoy the hills.", 45], ["Amit Verma", "Lucknow", "Excellent vehicle, dependable driver and very quick support.", 8], ["Pooja Bansal", "Gurugram", "The hotel choices and route planning were exactly what we wanted.", 48]];
@@ -451,11 +460,12 @@
         });
         const overlay = document.getElementById("overlay");
         const modalPackage = document.getElementById("modalPackage");
-        function openModal(t = "Plan your Sikkim & Darjeeling trip", p = "Get a customised quotation", im = pics[0]) {
+        function openModal(t = "Plan your Sikkim & Darjeeling trip", p = "Get a customised quotation", im = pics[0], pax = null) {
             document.getElementById("modalTitle").textContent = t;
             document.getElementById("modalPrice").textContent = p;
             document.getElementById("modalImg").src = im;
             modalPackage.value = t === "Plan your Sikkim & Darjeeling trip" ? "Custom Sikkim Darjeeling Trip" : t;
+            if (pax) document.getElementById("modalTravellers").value = String(pax);
             overlay.classList.add("show");
             document.body.style.overflow = "hidden";
         }
