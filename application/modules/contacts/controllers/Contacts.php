@@ -37,6 +37,16 @@ class Contacts extends MX_Controller
     }
 
     /**
+     * The Sikkim & Darjeeling page previously lived at sdt-landing-page and a
+     * mistyped "sikkiim" (double-i) variant was briefly tested; send both to
+     * the current URL with a permanent redirect instead of 404ing.
+     */
+    public function sdt_landing_page_moved()
+    {
+        redirect(site_url('sikkim-darjeeling-tour-package'), 'location', 301);
+    }
+
+    /**
      * Receive landing-page leads, save them for the admin panel and trigger mail.
      */
     public function landing_submit()

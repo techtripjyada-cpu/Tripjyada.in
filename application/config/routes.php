@@ -14,6 +14,9 @@ $route['bhutan-landing-page']  = 'contacts/landing_page';
 $route['bhutan-landing-page/submit'] = 'contacts/landing_submit';
 $route['sikkim-darjeeling-tour-package']  = 'contacts/sdt_landing_page';
 $route['sikkim-darjeeling-tour-package/submit'] = 'contacts/sdt_landing_submit';
+// Permanent redirects from the old URL and a briefly-tested misspelling.
+$route['sdt-landing-page']  = 'contacts/sdt_landing_page_moved';
+$route['sikkiim-darjeeling-tour-package'] = 'contacts/sdt_landing_page_moved';
 $route['blog']          = 'blog/view';
 $route['blogs']         = 'blog/view';
 $route['photo-gallery'] = 'gallery/photo_gallery';
