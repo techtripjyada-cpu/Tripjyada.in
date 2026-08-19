@@ -104,6 +104,7 @@ class Contacts extends MX_Controller
         $this->form_validation->set_rules('name', 'Name', 'required|trim|min_length[2]|max_length[100]');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|max_length[190]');
         $this->form_validation->set_rules('phone', 'Phone', 'required|trim|max_length[24]');
+        $this->form_validation->set_rules('city', 'City', 'trim|max_length[80]');
         $this->form_validation->set_rules('travel_month', 'Travel month', 'trim|max_length[40]');
         $this->form_validation->set_rules('travel_date', 'Travel date', 'trim|max_length[10]');
         $this->form_validation->set_rules('travellers', 'Traveller count', 'required|trim|max_length[30]');
@@ -188,6 +189,7 @@ class Contacts extends MX_Controller
             'name' => $this->landing_post_value('name'),
             'email' => strtolower($this->landing_post_value('email')),
             'phone' => $phone,
+            'city' => $this->landing_post_value('city'),
             'travel_month' => $travelMonth,
             'travel_date' => $travelDate,
             'travellers' => $travellers,

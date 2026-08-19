@@ -344,6 +344,9 @@ class Contacts_mdl extends CI_Model
             'Travellers: ' . $lead['travellers'],
             'Hotel: ' . $lead['hotel_category'],
         );
+        if ($lead['city'] !== '') {
+            $messageParts[] = 'City: ' . $lead['city'];
+        }
         if ($lead['estimated_price'] !== '') {
             $messageParts[] = 'Displayed price: ' . $lead['estimated_price'];
         }
@@ -383,6 +386,7 @@ class Contacts_mdl extends CI_Model
                 'Name' => $lead['name'],
                 'Phone' => $phoneDisplay,
                 'Email' => $lead['email'],
+                'City' => $lead['city'],
                 'Package' => $lead['package_name'],
                 'Travel Month' => $lead['travel_month'],
                 'Travel Date' => $lead['travel_date'],
@@ -429,6 +433,7 @@ class Contacts_mdl extends CI_Model
             'name' => $lead['name'],
             'email' => $lead['email'],
             'phone' => $lead['phone'],
+            'city' => $lead['city'],
             'travellers' => $lead['travellers'],
             'source' => $lead['source'],
             'package_name' => $lead['package_name'],
