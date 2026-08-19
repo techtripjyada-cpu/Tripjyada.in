@@ -574,6 +574,7 @@
         $aboutTeam = array(
           array('name' => 'Dharmendra Kumar Jha', 'role' => 'CEO', 'image' => 'Dharmendra.jpg', 'bio' => 'Driven by adventure and shaped by years of experience on the road, our CEO leads TripJyada with a commitment to creating journeys filled with culture, connection, and discovery.'),
           array('name' => 'Subhajit Rahut', 'role' => 'Chief Operating Officer', 'image' => 'Subhojit.jpg', 'bio' => 'As the Chief Operating Officer of TripJyada, he ensures every journey is thoughtfully planned and seamlessly executed, delivering exceptional travel experiences with precision and care.'),
+          array('name' => 'Mr. Rakesh Ghosh', 'role' => 'Chief Sales Officer', 'image' => 'rakesh-ghosh-cso.jpeg', 'bio' => 'As Chief Sales Officer at TripJyada, he drives growth and builds lasting client relationships, turning enquiries into memorable journeys through a customer-first approach.'),
           array('name' => 'Tapashya Pradhan', 'role' => 'Zonal Head', 'image' => 'Tapashya Pradhan.jpeg', 'bio' => 'As Zonal Head at TripJyada, he leads regional operations with a focus on delivering seamless travel experiences and strong local partnerships.')
         );
         foreach ($aboutTeam as $member):
