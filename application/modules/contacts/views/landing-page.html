@@ -372,7 +372,9 @@
         const pics = ["assets/images/landing/bhutan/tigers-nest-sm.webp", "assets/images/landing/bhutan/punakha-dzong-sm.webp", "assets/images/landing/bhutan/paro-dzong-sm.webp", "assets/images/landing/bhutan/thimphu-sm.webp", "assets/images/landing/bhutan/dochula-pass-sm.webp"];
         const bhutanDurations = {
             "5N/6D": { route: "Thimphu • Dochula • Punakha • Paro", prices: { 2: 32399, 4: 22139, 6: 21059, 8: 18359, 10: 19439, 12: 18899, 14: 18359, 16: 17819, 18: 17603 } },
-            "6N/7D": { route: "Phuentsholing • Thimphu • Punakha • Paro", prices: { 2: 37799, 4: 28619, 6: 25487, 8: 25379, 10: 23219, 12: 22679, 14: 22139, 16: 21599, 18: 21167 } }
+            "6N/7D": { route: "Phuentsholing • Thimphu • Punakha • Paro", prices: { 2: 37799, 4: 28619, 6: 25487, 8: 25379, 10: 23219, 12: 22679, 14: 22139, 16: 21599, 18: 21167 } },
+            // Only 4- and 6-person pricing supplied so far for this duration; dropdown will show only these until more group sizes are priced.
+            "8N/9D": { route: "Thimphu • Punakha • Paro • Chele La Pass", prices: { 4: 42137, 6: 39962 } }
         };
         // Same duration = same real rate-card pricing; only name/photo/tag/default pax vary per audience.
         const bhutanPacks = [
@@ -383,7 +385,11 @@
             { duration: "6N/7D", name: "Bhutan Family Circuit", tag: "Family Pick", image: pics[2], defaultPax: "4" },
             { duration: "6N/7D", name: "Bhutan Honeymoon Special", tag: "Honeymoon", image: pics[1], defaultPax: "2" },
             { duration: "6N/7D", name: "Bhutan Group Tour", tag: "Group Tour", image: pics[3], defaultPax: "8" },
-            { duration: "6N/7D", name: "Bhutan Adventure Circuit", tag: "Adventure", image: pics[0], defaultPax: "2" }
+            { duration: "6N/7D", name: "Bhutan Adventure Circuit", tag: "Adventure", image: pics[0], defaultPax: "2" },
+            { duration: "8N/9D", name: "Bhutan Honeymoon Getaway", tag: "Honeymoon", image: pics[4], defaultPax: "4" },
+            { duration: "8N/9D", name: "Bhutan Adventure Expedition", tag: "Adventure", image: pics[0], defaultPax: "4" },
+            { duration: "8N/9D", name: "Bhutan Family Tour", tag: "Family Pick", image: pics[1], defaultPax: "4" },
+            { duration: "8N/9D", name: "Bhutan Group Tour Extended", tag: "Group Tour", image: pics[2], defaultPax: "6" }
         ].map(p => Object.assign({}, p, bhutanDurations[p.duration]));
         const money = n => "₹" + n.toLocaleString("en-IN");
         const grid = document.getElementById("packageGrid");
