@@ -31,7 +31,7 @@
                 <div class="proof"><span>★ 4.9/5 rating</span><span>✓ 30,000+ movements</span><span>✓ Local destination
                         team</span></div>
             </div>
-            <form class="lead js-lead-form" action="bhutan-landing-page/submit" method="post">
+            <form class="lead js-lead-form" action="bhutan-tour-package/submit" method="post">
                 <input type="hidden" name="source" value="hero">
                 <input type="hidden" name="package_name" value="Bhutan Independence Day Offer">
                 <input type="hidden" name="hotel_category" value="Deluxe">
@@ -325,7 +325,7 @@
                     <div><strong id="modalTitle">Plan your Bhutan trip</strong><span id="modalPrice">Get a customised
                             quotation</span></div>
                 </div>
-                <form class="js-lead-form" action="bhutan-landing-page/submit" method="post">
+                <form class="js-lead-form" action="bhutan-tour-package/submit" method="post">
                     <input type="hidden" name="source" value="modal">
                     <input type="hidden" name="package_name" id="modalPackage" value="Custom Bhutan Trip">
                     <label class="hp-field" aria-hidden="true">Website<input name="website" tabindex="-1"
@@ -406,7 +406,7 @@
         };
         const qs = [["Do Indian citizens need a visa for Bhutan?", "No. Indian citizens need a valid passport or voter ID and an entry permit, which our team assists with."], ["What does the Independence Day offer include?", "Selected Bhutan packages receive up to 15% savings; final pricing depends on dates and hotel category."], ["What is the best time to visit Bhutan?", "March–May and September–November are popular, while winter is quieter with clear skies."], ["Is SDF included?", "Your quotation clearly states the applicable Sustainable Development Fee and whether it is included."], ["Can I enter Bhutan by road?", "Yes, most road journeys enter through Phuentsholing from Bagdogra, NJP or Siliguri."], ["Can I fly directly to Bhutan?", "Yes, flights operate to Paro from selected Indian cities, subject to schedule."], ["Are meals included?", "Meal plans vary; breakfast is common and vegetarian or Jain requirements can be arranged."], ["Can the itinerary be customised?", "Yes, duration, hotels, vehicle, meals and pace can all be customised."], ["Is Tiger’s Nest suitable for everyone?", "It is a moderate hike; we can suggest alternatives based on age and fitness."], ["What support is included?", "You receive pre-trip assistance, local coordination and 24×7 emergency support."]];
         document.getElementById("faqList").innerHTML = qs.map((q, i) => `<details ${i === 0 ? "open" : ""}><summary><span>${String(i + 1).padStart(2, "0")}</span>${q[0]}<b>+</b></summary><p>${q[1]}</p></details>`).join("");
-        const siteRoot = window.location.pathname.replace(/\/bhutan-landing-page\/?$/, "/");
+        const siteRoot = window.location.pathname.replace(/\/bhutan-tour-package\/?$/, "/");
         const partnerBase = siteRoot + "assets/images/landing/partners/";
         document.querySelectorAll("[data-site-path]").forEach(link => link.href = siteRoot + link.dataset.sitePath);
         document.querySelectorAll("[data-site-asset]").forEach(asset => asset.src = siteRoot + asset.dataset.siteAsset);

@@ -10,11 +10,12 @@ $route['about']         = 'about/index';
 $route['terms-and-conditions'] = 'terms_conditions/terms_conditions/index';
 $route['contact']       = 'contacts/index';
 $route['contacts']      = 'contacts/index';
-$route['bhutan-landing-page']  = 'contacts/landing_page';
-$route['bhutan-landing-page/submit'] = 'contacts/landing_submit';
+$route['bhutan-tour-package']  = 'contacts/landing_page';
+$route['bhutan-tour-package/submit'] = 'contacts/landing_submit';
 $route['sikkim-darjeeling-tour-package']  = 'contacts/sdt_landing_page';
 $route['sikkim-darjeeling-tour-package/submit'] = 'contacts/sdt_landing_submit';
-// Permanent redirects from the old URL and a briefly-tested misspelling.
+// Permanent redirects from old URLs and briefly-tested misspellings.
+$route['bhutan-landing-page']  = 'contacts/landing_page_moved';
 $route['sdt-landing-page']  = 'contacts/sdt_landing_page_moved';
 $route['sikkiim-darjeeling-tour-package'] = 'contacts/sdt_landing_page_moved';
 $route['blog']          = 'blog/view';

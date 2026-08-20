@@ -28,6 +28,15 @@ class Contacts extends MX_Controller
     }
 
     /**
+     * The Bhutan page previously lived at bhutan-landing-page; send it to
+     * the current URL with a permanent redirect instead of 404ing.
+     */
+    public function landing_page_moved()
+    {
+        redirect(site_url('bhutan-tour-package'), 'location', 301);
+    }
+
+    /**
      * Render the standalone Sikkim & Darjeeling campaign page.
      */
     public function sdt_landing_page()
