@@ -374,7 +374,8 @@ textarea {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, minmax(300px, 460px));
+    justify-content: center;
     gap: 22px
 }
 
@@ -392,8 +393,7 @@ textarea {
     position: relative
 }
 
-.photo span,
-.photo b {
+.photo span {
     position: absolute;
     top: 12px;
     left: 12px;
@@ -402,12 +402,6 @@ textarea {
     padding: 7px 9px;
     border-radius: 4px;
     font-size: 8px
-}
-
-.photo b {
-    top: auto;
-    bottom: 12px;
-    background: var(--o)
 }
 
 .body {
@@ -446,31 +440,31 @@ textarea {
     text-overflow: ellipsis
 }
 
-.tiers {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
+.paxPicker {
     margin: 13px 0
 }
 
-.tiers label {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 7px 3px;
-    text-align: center;
-    font-size: 8px;
+.paxPicker label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 9px;
     font-weight: 800;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: .02em
+}
+
+.paxPicker select {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 7px 8px;
+    font-size: 12px;
+    font-weight: 800;
+    color: #111;
+    background: #fff;
     cursor: pointer
-}
-
-.tiers input {
-    display: none
-}
-
-.tiers label:has(input:checked) {
-    background: #111;
-    color: #fff;
-    border-color: #111
 }
 
 .features {
