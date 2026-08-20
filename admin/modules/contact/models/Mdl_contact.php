@@ -48,6 +48,17 @@ class Mdl_contact extends CI_Model
     	$this->db->order_by('id','desc');
     	return $this->db->get("bookings");
     }
+    function view_booking_row($where)
+    {
+        $this->db->where($where);
+        return $this->db->get("bookings");
+    }
+    function delete_booking($where)
+    {
+        $this->db->where($where);
+        $a=$this->db->delete("bookings");
+        return $this->db->affected_rows($a);
+    }
     function add_data($data)
     {
         $a=$this->db->insert($this->table,$data);

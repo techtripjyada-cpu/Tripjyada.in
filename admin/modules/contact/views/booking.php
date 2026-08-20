@@ -34,6 +34,7 @@
         </div>
 	</div>
         <div class="col-sm-12 cards" dir-paginate="y in datadb | filter: search_text | itemsPerPage: 15" pagination-id="booking">
+        	<button type="button" class="booking-delete-btn" ng-click="delete_booking(y.id)" title="Delete this lead"><i class="fa fa-trash"></i></button>
         	<div class="row">
         		<div class="col-sm-4">
         			<h5><b>{{y.mfrom}}</b> - <strong>{{y.mto}}</strong></h5>
@@ -58,14 +59,16 @@
         </div>
    </div>
    <style>
-   .cards{background-image: linear-gradient(120deg, #fdfbfb 0%, #d2f0ff 100%);margin:5px 0px;padding:5px auto;
+   .cards{position:relative;background-image: linear-gradient(120deg, #fdfbfb 0%, #d2f0ff 100%);margin:5px 0px;padding:10px 40px 10px 10px;
     box-shadow: 1px 2px 8px 0px #dbdbdb;}
-   .cards h5{line-height: 1px;}
+   .cards h5{line-height: 1.35;margin:0 0 4px;}
    .cards b{color: #9c7e04}
    .cards h5 b{color: #0082ad}
    .cards q{font-weight:bold}
    .cards h5 strong{color: #00a200}
-   .booking-source{display:inline-block;margin:2px 6px 4px 0;padding:2px 7px;border-radius:10px;background:#f58220;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;}
+   .booking-source{display:inline-block;margin:2px 6px 6px 0;padding:2px 7px;border-radius:10px;background:#f58220;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;}
+   .booking-delete-btn{position:absolute;top:8px;right:8px;width:28px;height:28px;line-height:26px;text-align:center;padding:0;border:1px solid #f1b5b5;border-radius:50%;background:#fff;color:#d9534f;cursor:pointer;box-shadow:none;-webkit-box-shadow:none;}
+   .booking-delete-btn:hover{background:#d9534f;color:#fff;border-color:#d9534f;}
    #hoeapp-wrapper {background: #ffffff;}
    .booking-toolbar{display:flex;gap:12px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;}
    .booking-toolbar .custom_addon{flex:1 1 320px;}

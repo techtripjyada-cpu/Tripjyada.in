@@ -89,5 +89,22 @@ app.controller('ctrl_booking',function($scope,$http){
 	$scope.update_call=function(y){
 		$scope.x=y;
 	}
-	
+
+	$scope.delete_booking=function(id){
+		if(confirm("Delete this lead? This cannot be undone."))
+		{
+			$http.get("contact/delete_booking?id="+id).success(function(data){
+				if(data=="1")
+				{
+					messages("success", "Success!","Lead Deleted Successfully", 3000);
+				}
+				else
+				{
+					messages("danger", "Warning!","Lead not Deleted", 4000);
+				}
+				$scope.loader();
+			})
+		}
+	}
+
 });
