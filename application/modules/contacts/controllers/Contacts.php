@@ -456,12 +456,12 @@ class Contacts extends MX_Controller
             'Bhutan Adventure Circuit' => null,
             'Bhutan Quick Escape' => 29749,
             'Bhutan Family Holiday' => 42499,
-            'Complete Bhutan Circuit' => 50999,
+            'Complete Bhutan Circuit' => null,
             'Fly-In Bhutan Getaway' => 39099,
             'Senior-Friendly Bhutan' => 46749,
             'Romantic Bhutan Retreat' => 40799,
             'Bhutan Festival Journey' => 55249,
-            'Bhutan Grand Experience' => 63749,
+            'Bhutan Grand Experience' => null,
             'Custom Bhutan Trip' => null,
         );
     }
