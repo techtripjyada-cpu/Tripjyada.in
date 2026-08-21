@@ -442,9 +442,19 @@ class Contacts extends MX_Controller
     private function landing_package_prices()
     {
         return array(
-            'Bhutan Independence Day Offer' => 29749,
+            'Bhutan Independence Day Offer' => 32399,
+            // These cards use group-size pricing in the browser. Keep their
+            // server estimate blank rather than emailing a misleading amount;
+            // the confirmed seasonal quotation remains authoritative.
+            'Classic Bhutan Discovery' => null,
+            'Bhutan Honeymoon Retreat' => null,
+            'Bhutan Family Getaway' => null,
+            'Bhutan Adventure Trail' => null,
+            'Bhutan Family Circuit' => null,
+            'Bhutan Honeymoon Special' => null,
+            'Bhutan Group Tour' => null,
+            'Bhutan Adventure Circuit' => null,
             'Bhutan Quick Escape' => 29749,
-            'Classic Bhutan Discovery' => 36549,
             'Bhutan Family Holiday' => 42499,
             'Complete Bhutan Circuit' => 50999,
             'Fly-In Bhutan Getaway' => 39099,

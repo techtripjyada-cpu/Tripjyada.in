@@ -6,8 +6,10 @@
     <title>Bhutan Independence Day Sale | Tripjyada</title>
     <meta name="description"
         content="Real Bhutan tour packages with permit assistance, private transfers and 24×7 support. Get instant per-person pricing for your group size.">
-    <link rel="preload" as="image" href="assets/images/landing/bhutan/dochula-pass-hero.webp" fetchpriority="high">
-    <link rel="stylesheet" href="<?=base_url()?>assets/css/bhutan-ld-page.css">
+    <link rel="canonical" href="<?=site_url('bhutan-tour-package')?>">
+    <link rel="preload" as="image" href="<?=base_url()?>assets/images/landing/bhutan/dochula-pass-hero.webp" fetchpriority="high">
+    <link rel="stylesheet"
+        href="<?=base_url()?>assets/css/bhutan-ld-page.css?v=<?=filemtime(FCPATH . 'assets/css/bhutan-ld-page.css')?>">
 </head>
 <body>
     <div class="sale"><strong>🇮🇳 INDEPENDENCE DAY SALE</strong><span>Special Bhutan group fares</span>
@@ -31,7 +33,7 @@
                 <div class="proof"><span>★ 4.9/5 rating</span><span>✓ 30,000+ movements</span><span>✓ Local destination
                         team</span></div>
             </div>
-            <form class="lead js-lead-form" action="bhutan-tour-package/submit" method="post">
+            <form class="lead js-lead-form" action="<?=site_url('bhutan-tour-package/submit')?>" method="post">
                 <input type="hidden" name="source" value="hero">
                 <input type="hidden" name="package_name" value="Bhutan Independence Day Offer">
                 <input type="hidden" name="hotel_category" value="Deluxe">
@@ -81,10 +83,18 @@
             <div><span class="tag">LIVE BHUTAN DEALS</span>
                 <h2>Choose your Bhutan journey</h2>
             </div>
-            <p>Pick the trip style that fits you—honeymoon, family, group or adventure—then set your group size. The
-                displayed per-person price updates instantly.</p>
+            <p>Compare eight carefully selected Bhutan packages, then choose your group size to see the applicable
+                per-person rate.</p>
         </div>
         <div class="grid" id="packageGrid"></div>
+        <aside class="priceTerms" aria-label="Package pricing terms and conditions">
+            <strong>Pricing terms &amp; conditions</strong>
+            <p>Displayed prices are indicative per-person rates. Prices vary between peak season and off-season based
+                on travel dates, hotel and vehicle availability, group size and final inclusions. Your confirmed
+                quotation will show the final payable price.</p>
+            <a href="terms-and-conditions" data-site-path="terms-and-conditions" target="_blank" rel="noopener">Read
+                the full terms and conditions →</a>
+        </aside>
     </section>
     <section class="partners"><span class="tag">Trusted DMC of NorthEast</span>
         <h2>Businesses connected with us</h2>
@@ -167,25 +177,47 @@
             href="https://wa.me/919046248269?text=Hi%20Tripjyada%2C%20I'd%20like%20a%20quotation%20for%20a%20Bhutan%20trip.">WhatsApp
             an Expert ↗</a>
     </section>
-    <section class="gallery">
+    <section class="gallery" id="gallery">
         <div class="galleryHead"><span class="tag">BHUTAN THROUGH OUR TRAVELLERS’ EYES</span>
             <h2>Moments that become memories</h2>
-            <p>Real-looking travel moments across Bhutan’s monasteries, valleys and cultural landmarks.</p>
+            <p>Traveller moments from Bhutan’s viewpoints, monasteries and cultural landmarks.</p>
         </div>
         <div class="galleryTrack">
-            <article class="galleryItem"><img src="assets/images/landing/bhutan/tigers-nest-sm.webp"
-                    alt="Tiger's Nest monastery in Paro" loading="lazy" decoding="async"><span>Tiger’s Nest •
-                    Paro</span></article>
-            <article class="galleryItem"><img src="assets/images/landing/bhutan/punakha-dzong-sm.webp"
-                    alt="Punakha Dzong beside the river" loading="lazy" decoding="async"><span>Punakha Dzong</span>
-            </article>
-            <article class="galleryItem"><img src="assets/images/landing/bhutan/paro-dzong-sm.webp"
-                    alt="Paro valley in Bhutan" loading="lazy" decoding="async"><span>Paro Valley</span></article>
-            <article class="galleryItem"><img src="assets/images/landing/bhutan/thimphu-sm.webp"
-                    alt="Traditional Bhutanese architecture" loading="lazy" decoding="async"><span>Bhutanese
-                    Heritage</span></article>
+            <article class="galleryItem" role="button" tabindex="0" aria-label="Open Bhutan Viewpoint photo"><img src="<?=base_url()?>assets/images/reviews-images/bhutan/1.png"
+                    alt="Travellers enjoying a scenic Bhutan viewpoint" loading="lazy"
+                    decoding="async"><span>Bhutan Viewpoint</span></article>
+            <article class="galleryItem" role="button" tabindex="0" aria-label="Open Prayer Wheel photo"><img src="<?=base_url()?>assets/images/reviews-images/bhutan/2.png"
+                    alt="Traveller beside a traditional Bhutanese prayer wheel" loading="lazy"
+                    decoding="async"><span>Prayer Wheel • Bhutan</span></article>
+            <article class="galleryItem" role="button" tabindex="0" aria-label="Open Mountain Memories photo"><img src="<?=base_url()?>assets/images/reviews-images/bhutan/3.png"
+                    alt="Family enjoying a mountain viewpoint in Bhutan" loading="lazy"
+                    decoding="async"><span>Mountain Memories</span></article>
+            <article class="galleryItem" role="button" tabindex="0" aria-label="Open Tiger's Nest photo"><img src="<?=base_url()?>assets/images/reviews-images/bhutan/4.png"
+                    alt="Traveller near Tiger's Nest monastery with the Indian flag" loading="lazy"
+                    decoding="async"><span>Tiger’s Nest • Paro</span></article>
+            <article class="galleryItem" role="button" tabindex="0" aria-label="Open Bhutan Couple Journey photo"><img src="<?=base_url()?>assets/images/reviews-images/bhutan/5.png"
+                    alt="Couple enjoying a Bhutan sightseeing stop" loading="lazy"
+                    decoding="async"><span>Bhutan Couple Journey</span></article>
+            <article class="galleryItem" role="button" tabindex="0" aria-label="Open Bhutan With Friends photo"><img src="<?=base_url()?>assets/images/reviews-images/bhutan/6.png"
+                    alt="Friends outside a traditional Bhutanese building" loading="lazy"
+                    decoding="async"><span>Bhutan With Friends</span></article>
+            <article class="galleryItem" role="button" tabindex="0" aria-label="Open Punakha Valley photo"><img src="<?=base_url()?>assets/images/reviews-images/bhutan/7.png"
+                    alt="Group of travellers exploring a Bhutan valley" loading="lazy"
+                    decoding="async"><span>Punakha Valley</span></article>
+            <article class="galleryItem" role="button" tabindex="0" aria-label="Open Bhutan Cultural Welcome photo"><img src="<?=base_url()?>assets/images/reviews-images/bhutan/8.png"
+                    alt="Travellers sharing a cultural moment in Bhutan" loading="lazy"
+                    decoding="async"><span>Bhutan Cultural Welcome</span></article>
         </div>
     </section>
+    <div class="galleryLightbox" id="galleryLightbox" role="dialog" aria-modal="true"
+        aria-labelledby="galleryLightboxCaption" aria-hidden="true">
+        <button class="galleryLightboxClose" type="button" aria-label="Close gallery">×</button>
+        <button class="galleryLightboxNav galleryLightboxPrev" type="button" aria-label="Previous photo">‹</button>
+        <figure><img id="galleryLightboxImage" alt="">
+            <figcaption id="galleryLightboxCaption"></figcaption>
+        </figure>
+        <button class="galleryLightboxNav galleryLightboxNext" type="button" aria-label="Next photo">›</button>
+    </div>
     <section class="section faq" id="faq">
         <div><span class="tag">BEFORE YOU BOOK</span>
             <h2>Frequently asked questions</h2>
@@ -326,7 +358,7 @@
                     <div><strong id="modalTitle">Plan your Bhutan trip</strong><span id="modalPrice">Get a customised
                             quotation</span></div>
                 </div>
-                <form class="js-lead-form" action="bhutan-tour-package/submit" method="post">
+                <form class="js-lead-form" action="<?=site_url('bhutan-tour-package/submit')?>" method="post">
                     <input type="hidden" name="source" value="modal">
                     <input type="hidden" name="package_name" id="modalPackage" value="Custom Bhutan Trip">
                     <label class="hp-field" aria-hidden="true">Website<input name="website" tabindex="-1"
@@ -385,11 +417,7 @@
             { duration: "6N/7D", name: "Bhutan Family Circuit", tag: "Family Pick", image: pics[2], defaultPax: "4" },
             { duration: "6N/7D", name: "Bhutan Honeymoon Special", tag: "Honeymoon", image: pics[1], defaultPax: "2" },
             { duration: "6N/7D", name: "Bhutan Group Tour", tag: "Group Tour", image: pics[3], defaultPax: "8" },
-            { duration: "6N/7D", name: "Bhutan Adventure Circuit", tag: "Adventure", image: pics[0], defaultPax: "2" },
-            { duration: "8N/9D", name: "Bhutan Honeymoon Getaway", tag: "Honeymoon", image: pics[4], defaultPax: "4" },
-            { duration: "8N/9D", name: "Bhutan Adventure Expedition", tag: "Adventure", image: pics[0], defaultPax: "4" },
-            { duration: "8N/9D", name: "Bhutan Family Tour", tag: "Family Pick", image: pics[1], defaultPax: "4" },
-            { duration: "8N/9D", name: "Bhutan Group Tour Extended", tag: "Group Tour", image: pics[2], defaultPax: "6" }
+            { duration: "6N/7D", name: "Bhutan Adventure Circuit", tag: "Adventure", image: pics[0], defaultPax: "2" }
         ].map(p => Object.assign({}, p, bhutanDurations[p.duration]));
         const money = n => "₹" + n.toLocaleString("en-IN");
         const grid = document.getElementById("packageGrid");
@@ -397,7 +425,7 @@
             const c = document.createElement("article");
             c.className = "card";
             const paxOptions = Object.keys(pk.prices).map(px => `<option value="${px}" ${px === pk.defaultPax ? "selected" : ""}>${px} Travellers</option>`).join("");
-            c.innerHTML = `<div class="photo" style="background-image:url('${pk.image}')"><span>${pk.tag}</span></div><div class="body"><div class="meta"><span>${pk.duration}</span><i>★ 4.${9 - i % 3}</i></div><h3>${pk.name}</h3><p class="route">⌖ ${pk.route}</p><div class="paxPicker"><label>Travellers<select class="paxSelect">${paxOptions}</select></label></div><ul class="features"><li>✓ Verified stay & breakfast</li><li>✓ Private transfers & sightseeing</li><li>✓ Permit support + 24×7 assistance</li></ul><div class="price"><small>Independence Day price</small><strong>${money(pk.prices[pk.defaultPax])}</strong> <span>/person</span></div><div class="cardBtns"><a href="tel:+919083701454" aria-label="Call"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2Z"/></svg></a><button class="callback" type="button">Request Callback</button><a class="wa" aria-label="WhatsApp" href="https://wa.me/919046248269?text=${encodeURIComponent(`Hi Tripjyada, I'm interested in the ${pk.name} package. Please share more details.`)}"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.87 9.87 0 1 1 8.37 4.63M12.05 0A11.9 11.9 0 0 0 .16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65A11.9 11.9 0 1 0 12.05 0"/></svg></a></div></div>`;
+            c.innerHTML = `<div class="photo" style="background-image:url('${pk.image}')"><span>${pk.tag}</span></div><div class="body"><div class="meta"><span>${pk.duration}</span><i>★ 4.${9 - i % 3}</i></div><h3>${pk.name}</h3><p class="route">⌖ ${pk.route}</p><div class="paxPicker"><label>Travellers<select class="paxSelect">${paxOptions}</select></label></div><ul class="features"><li>✓ Verified stay & breakfast</li><li>✓ Private transfers & sightseeing</li><li>✓ Permit support + 24×7 assistance</li></ul><div class="price"><small>Starting price for selected group</small><strong>${money(pk.prices[pk.defaultPax])}</strong> <span>/person</span></div><div class="cardBtns"><a href="tel:+919083701454" aria-label="Call"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2Z"/></svg></a><button class="callback" type="button">Request Callback</button><a class="wa" aria-label="WhatsApp" href="https://wa.me/919046248269?text=${encodeURIComponent(`Hi Tripjyada, I'm interested in the ${pk.name} package. Please share more details.`)}"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.87 9.87 0 1 1 8.37 4.63M12.05 0A11.9 11.9 0 0 0 .16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65A11.9 11.9 0 1 0 12.05 0"/></svg></a></div></div>`;
             grid.appendChild(c);
             const select = c.querySelector(".paxSelect");
             select.addEventListener("change", () => {
@@ -426,7 +454,7 @@
         };
         const qs = [["Do Indian citizens need a visa for Bhutan?", "No. Indian citizens need a valid passport or voter ID and an entry permit, which our team assists with."], ["What does the Independence Day offer include?", "Selected Bhutan packages receive up to 15% savings; final pricing depends on dates and hotel category."], ["What is the best time to visit Bhutan?", "March–May and September–November are popular, while winter is quieter with clear skies."], ["Is SDF included?", "Your quotation clearly states the applicable Sustainable Development Fee and whether it is included."], ["Can I enter Bhutan by road?", "Yes, most road journeys enter through Phuentsholing from Bagdogra, NJP or Siliguri."], ["Can I fly directly to Bhutan?", "Yes, flights operate to Paro from selected Indian cities, subject to schedule."], ["Are meals included?", "Meal plans vary; breakfast is common and vegetarian or Jain requirements can be arranged."], ["Can the itinerary be customised?", "Yes, duration, hotels, vehicle, meals and pace can all be customised."], ["Is Tiger’s Nest suitable for everyone?", "It is a moderate hike; we can suggest alternatives based on age and fitness."], ["What support is included?", "You receive pre-trip assistance, local coordination and 24×7 emergency support."]];
         document.getElementById("faqList").innerHTML = qs.map((q, i) => `<details ${i === 0 ? "open" : ""}><summary><span>${String(i + 1).padStart(2, "0")}</span>${q[0]}<b>+</b></summary><p>${q[1]}</p></details>`).join("");
-        const siteRoot = window.location.pathname.replace(/\/bhutan-tour-package\/?$/, "/");
+        const siteRoot = <?=json_encode(rtrim(base_url(), '/') . '/') ?>;
         const partnerBase = siteRoot + "assets/images/landing/partners/";
         document.querySelectorAll("[data-site-path]").forEach(link => link.href = siteRoot + link.dataset.sitePath);
         document.querySelectorAll("[data-site-asset]").forEach(asset => asset.src = siteRoot + asset.dataset.siteAsset);
@@ -455,6 +483,55 @@
             if (index >= partnerLogos.length) card.setAttribute("aria-hidden", "true");
             card.appendChild(logo);
             partnerRoot.appendChild(card);
+        });
+        const galleryItems = [...document.querySelectorAll(".galleryItem")];
+        const galleryLightbox = document.getElementById("galleryLightbox");
+        const galleryLightboxImage = document.getElementById("galleryLightboxImage");
+        const galleryLightboxCaption = document.getElementById("galleryLightboxCaption");
+        let galleryIndex = 0;
+        let galleryReturnFocus = null;
+        function openGallery(index) {
+            const opening = !galleryLightbox.classList.contains("show");
+            galleryIndex = (index + galleryItems.length) % galleryItems.length;
+            const item = galleryItems[galleryIndex];
+            const image = item.querySelector("img");
+            galleryLightboxImage.src = image.currentSrc || image.src;
+            galleryLightboxImage.alt = image.alt;
+            galleryLightboxCaption.textContent = item.querySelector("span").textContent;
+            if (opening) galleryReturnFocus = document.activeElement;
+            galleryLightbox.classList.add("show");
+            galleryLightbox.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+            if (opening) galleryLightbox.querySelector(".galleryLightboxClose").focus();
+        }
+        function closeGallery() {
+            if (!galleryLightbox.classList.contains("show")) return;
+            galleryLightbox.classList.remove("show");
+            galleryLightbox.setAttribute("aria-hidden", "true");
+            galleryLightboxImage.removeAttribute("src");
+            document.body.style.overflow = "";
+            if (galleryReturnFocus && galleryReturnFocus.isConnected) galleryReturnFocus.focus();
+        }
+        galleryItems.forEach((item, index) => {
+            item.addEventListener("click", () => openGallery(index));
+            item.addEventListener("keydown", event => {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    openGallery(index);
+                }
+            });
+        });
+        galleryLightbox.querySelector(".galleryLightboxClose").addEventListener("click", closeGallery);
+        galleryLightbox.querySelector(".galleryLightboxPrev").addEventListener("click", () => openGallery(galleryIndex - 1));
+        galleryLightbox.querySelector(".galleryLightboxNext").addEventListener("click", () => openGallery(galleryIndex + 1));
+        galleryLightbox.addEventListener("click", event => {
+            if (event.target === galleryLightbox) closeGallery();
+        });
+        document.addEventListener("keydown", event => {
+            if (!galleryLightbox.classList.contains("show")) return;
+            if (event.key === "Escape") closeGallery();
+            if (event.key === "ArrowLeft") openGallery(galleryIndex - 1);
+            if (event.key === "ArrowRight") openGallery(galleryIndex + 1);
         });
         const overlay = document.getElementById("overlay");
         const modalPackage = document.getElementById("modalPackage");

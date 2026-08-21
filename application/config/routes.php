@@ -12,6 +12,10 @@ $route['contact']       = 'contacts/index';
 $route['contacts']      = 'contacts/index';
 $route['bhutan-tour-package']  = 'contacts/landing_page';
 $route['bhutan-tour-package/submit'] = 'contacts/landing_submit';
+$route['bhutan-tur-package']  = 'contacts/landing_page';
+$route['bhutan-tur-package/submit'] = 'contacts/landing_submit';
+$route['landing-page']  = 'contacts/landing_page';
+$route['landing-page/submit'] = 'contacts/landing_submit';
 $route['sikkim-darjeeling-tour-package']  = 'contacts/sdt_landing_page';
 $route['sikkim-darjeeling-tour-package/submit'] = 'contacts/sdt_landing_submit';
 // Permanent redirects from old URLs and briefly-tested misspellings.
